@@ -151,7 +151,7 @@ namespace Lotto
     class ConverterRangeHTMLDrawsToXML : ConverterAllHTMLDrawsToXML
     {
         // Puts HTML code of each draw into a List. Regex against these HTML codes is executed later.
-        // TODO: Implement for nodes with Plus
+        // TODO:Implement for nodes with Plus
         protected override void AddValuesToList(List<string> listSeparateDraws, HtmlNodeCollection nodesSeparateDraws, HtmlNodeCollection nodesPluses)
         {
             if (nodesPluses == null)
