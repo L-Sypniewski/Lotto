@@ -151,7 +151,6 @@ namespace Lotto
     class ConverterRangeHTMLDrawsToXML : ConverterAllHTMLDrawsToXML
     {
         // Puts HTML code of each draw into a List. Regex against these HTML codes is executed later.
-        // TODO:Implement for nodes with Plus
         protected override void AddValuesToList(List<string> listSeparateDraws, HtmlNodeCollection nodesSeparateDraws, HtmlNodeCollection nodesPluses)
         {
             if (nodesPluses == null)
@@ -164,9 +163,15 @@ namespace Lotto
             }
             else
             {
-                for (int i = 0; i < nodesSeparateDraws.Count; i++)
+                //Processing nodes with pluses, since the newest draws are located at the beginning of a nodes collection
+                for (int i = 0; i < nodesPluses.Count; i++)
                 {
                     listSeparateDraws.Add(string.Format("{0} plus:{1}", nodesSeparateDraws[i].InnerText, nodesPluses[i].InnerText));
+                }
+
+                for (int i = nodesPluses.Count; i < nodesSeparateDraws.Count; i++)
+                {
+                    listSeparateDraws.Add(string.Format("{0} plus:", nodesSeparateDraws[i].InnerText));
                 }
             }
         }
