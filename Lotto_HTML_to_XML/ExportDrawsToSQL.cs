@@ -8,20 +8,16 @@ using System.Threading.Tasks;
 
 namespace Lotto
 {
-    class ExportAllDrawsToSQL
+    class ExportDrawsToSQL
     {
         public SQLUtils.ConnectionString connectionString { get; private set; }
-        private List<Losowanie> importData(string url)
-        {
-            ConverterAllHTMLDrawsToXML conv = new ConverterAllHTMLDrawsToXML();
-            return conv.GetDrawsList(url);
 
         //Constructors
-        public ExportAllDrawsToSQL(SQLUtils.ConnectionString ConnString)
+        public ExportDrawsToSQL(SQLUtils.ConnectionString ConnString)
         {
             this.connectionString = ConnString;
         }
-        public ExportAllDrawsToSQL(string serverName, string databaseName, bool trustedConnection)
+        public ExportDrawsToSQL(string serverName, string databaseName, bool trustedConnection)
         {
             this.connectionString = new SQLUtils.ConnectionString(serverName, databaseName, trustedConnection);
         }
@@ -37,12 +33,12 @@ namespace Lotto
         }
 
         // Sends List<> of all draws to SQL database
-        public void ExportAllDrawsListToSQL(string TableName)
+        public void ExportDrawsListToSQL(string TableName, string url = ConvertHTMLDrawsToXML.SOURCE_LINK_TO_ALL)
         {
             using (SqlConnection conn = new SqlConnection(this.connectionString.ToString()))
             {
                 string qry = string.Format(@"select * from {0}", TableName);
-                string qryInsertDataFromList = string.Format(@"insert into {0} (NrLosowania, DataLosowania, Plus, Liczba1, Liczba2, Liczba3, Liczba4, Liczba5, Liczba6, Liczba7, Liczba8, Liczba9,                                                   Liczba10, Liczba11, Liczba12, Liczba13, Liczba14, Liczba15, Liczba16, Liczba17, Liczba18, Liczba19, Liczba20) 
+                string qryInsertDataFromList = string.Format(@"insert into {0} (NrLosowania, DataLosowania, Plus, Liczba1, Liczba2, Liczba3, Liczba4, Liczba5, Liczba6, Liczba7, Liczba8, Liczba9,Liczba10, Liczba11, Liczba12, Liczba13, Liczba14, Liczba15, Liczba16, Liczba17, Liczba18, Liczba19, Liczba20) 
                                                    values(@NrLosowania, @DataLosowania, @Plus, @Liczba1, @Liczba2, @Liczba3, @Liczba4, @Liczba5, @Liczba6, @Liczba7, @Liczba8, @Liczba9, @Liczba10, @Liczba11, @Liczba12, @Liczba13, @Liczba14, @Liczba15, @Liczba16, @Liczba17, @Liczba18, @Liczba19, @Liczba20)", TableName);
 
                 DataSet dataSetLosowania = new DataSet();
@@ -55,7 +51,7 @@ namespace Lotto
                 DataTable dt = dataSetLosowania.Tables[TableName];
                 int counter = 0; //Counter for displaying process of adding new rows to a database in a console windows
 
-                foreach (var los in importData(DownloadHTML.SOURCE_LINK_TO_ALL)) //Adding new rows to a dataset
+                foreach (var los in ConvertHTMLDrawsToXML.GetDrawsList(url)) //Adding new rows to a dataset
                 {
                     DataRow newRow = dt.NewRow();
                     newRow["NrLosowania"] = los.NrLosowania;
@@ -97,8 +93,6 @@ namespace Lotto
             {
                 string lastDrawDate = "" 
             }*/
-        
-        
     }
         
 }

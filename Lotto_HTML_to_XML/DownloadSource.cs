@@ -4,10 +4,8 @@ using System.IO;
 
 namespace Lotto
 {
-    class DownloadHTML
+    static class DownloadSource
     {
-        public const string SOURCE_LINK_TO_ALL = "http://megalotto.pl/wyniki/multi-multi/losowania-od-28-Czerwca-1995-do-1-Lipca-2018"; // "http://megalotto.pl/wyniki/multi-multi"
-
         // Downloads all draws without saving an HTML source to a disk
         public static Stream DownloadAll(string url)
         {

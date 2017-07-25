@@ -33,6 +33,11 @@ namespace Lotto
             DataLosowania = dDataLosowania;
             Plus = dPlus;
         }
+
+        public override string ToString()
+        {
+            return string.Format("DrawNo: {0}, DrawDate: {1}, Plus: {2}", this.NrLosowania.ToString(), this.DataLosowania.ToString(), this.Plus.ToString());
+        }
     }
 }
 
