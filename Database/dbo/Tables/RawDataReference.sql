@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[RawDataReference] (
+    [NrLosowania]   SMALLINT NOT NULL,
+    [DataLosowania] DATETIME NOT NULL,
+    [Plus]          TINYINT  NULL,
+    [Liczba1]       TINYINT  NOT NULL,
+    [Liczba2]       TINYINT  NOT NULL,
+    [Liczba3]       TINYINT  NOT NULL,
+    [Liczba4]       TINYINT  NOT NULL,
+    [Liczba5]       TINYINT  NOT NULL,
+    [Liczba6]       TINYINT  NOT NULL,
+    [Liczba7]       TINYINT  NOT NULL,
+    [Liczba8]       TINYINT  NOT NULL,
+    [Liczba9]       TINYINT  NOT NULL,
+    [Liczba10]      TINYINT  NOT NULL,
+    [Liczba11]      TINYINT  NOT NULL,
+    [Liczba12]      TINYINT  NOT NULL,
+    [Liczba13]      TINYINT  NOT NULL,
+    [Liczba14]      TINYINT  NOT NULL,
+    [Liczba15]      TINYINT  NOT NULL,
+    [Liczba16]      TINYINT  NOT NULL,
+    [Liczba17]      TINYINT  NOT NULL,
+    [Liczba18]      TINYINT  NOT NULL,
+    [Liczba19]      TINYINT  NOT NULL,
+    [Liczba20]      TINYINT  NOT NULL,
+    CONSTRAINT [PK_RawDataReference] PRIMARY KEY CLUSTERED ([NrLosowania] ASC)
+);
+

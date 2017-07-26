@@ -140,11 +140,7 @@ namespace Lotto
             }
             public override string ToString()
             {
-                if (this.tableName == null)
-                    return string.Format(@"Server={0};Database={1};Trusted_Connection={2}", this.serverName, this.databaseName, this.trustedConnection.ToString());
-                else
-                    return string.Format(@"Server={0};Database={1};Database={2};Trusted_Connection={3}", this.serverName, this.databaseName, this.tableName, this.trustedConnection.ToString());
-
+                return string.Format(@"Server={0};Database={1};Trusted_Connection={2}", this.serverName, this.databaseName, this.trustedConnection.ToString());
             }
         }
     }

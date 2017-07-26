@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddSeparatesValuesToListBackup.cs" />
     <Compile Include="AsyncDownloading.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -83,6 +84,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SQL\ShowAll.sql" />
+    <Content Include="SQL\SQLQuery1.sql" />
+    <Content Include="SQL\SQLQuery2.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
