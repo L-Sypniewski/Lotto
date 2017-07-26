@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Lotto
 {
-    static class ConvertHTMLDrawsToXML
+    public static class ConvertHTMLDrawsToXML
     {
         #region Consts
          const int INDEX_OF_FIRST_DRAW_WITH_PLUS = 4347;
