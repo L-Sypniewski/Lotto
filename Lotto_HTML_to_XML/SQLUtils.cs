@@ -79,7 +79,7 @@ namespace Lotto
             return string.Format("http://megalotto.pl/wyniki/multi-multi/losowania-od-{0}-do-{1}", ConvertDateToLinkString(from), ConvertDateToLinkString(to));
         }
 
-        public static string ConvertDateToLinkString(DateTime dt)
+        private static string ConvertDateToLinkString(DateTime dt)
         {
             string monthName = "";
             switch (dt.Month)

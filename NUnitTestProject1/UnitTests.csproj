@@ -43,11 +43,19 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test_ConvertHTMLDrawsToXML.cs" />
+    <Compile Include="TestConvertHTMLDrawsToXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Reference data\losowaniaReference.xml" />
+    <Content Include="Reference data\TestReference.html" />
+    <Content Include="Reference data\test_mixed.html" />
+    <Content Include="Reference data\test_without_plus.html" />
+    <Content Include="Reference data\test_with_plus.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
