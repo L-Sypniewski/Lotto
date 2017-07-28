@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 
 namespace Lotto
 {
@@ -9,12 +10,14 @@ namespace Lotto
     {
         static void Main(string[] args)
         {
-            SQLUtils.ConnectionString connectionString = new SQLUtils.ConnectionString(@"Praca-Laptop\SQLEXPRESS", "WynikiLotto", true, "RawData");
-            ExportDrawsToSQL con = new ExportDrawsToSQL(connectionString);
-            Console.WriteLine("Starting");
-            Console.WriteLine(SQLUtils.IsServerConnected(connectionString));
+            //SQLUtils.ConnectionString connectionString = new SQLUtils.ConnectionString(@"Praca-Laptop\SQLEXPRESS", "WynikiLotto", true, "RawData");
+            //ExportDrawsToSQL con = new ExportDrawsToSQL(connectionString);
+            //Console.WriteLine("Starting");
+            //Console.WriteLine(SQLUtils.IsServerConnected(connectionString));
             //con.ExportDrawsListToSQL();
-            ConvertHTMLDrawsToXML.SaveXMLToFile("losowania.xml", null, localHTMLSource: true, saveHTMLSourceToLocalFile: false, sourceHTMLPath: "Test.html");
+            //ConvertHTMLDrawsToXML.SaveXMLToFile("losowania.xml", null, localHTMLSource: true, saveHTMLSourceToLocalFile: false, sourceHTMLPath: "Test.html");
+            DateTime dt = DateTime.ParseExact("03/04/2004 08:30:00", "dd/MM/yyyy HH:mm:ss", null); //DateTime.ParseExact(x, "dd/mm/yyyy", null)
+            Console.WriteLine(dt.Minute);
 
             //DateTime dt1 = new DateTime(2008, 6, 29);
             //DateTime dt2 = new DateTime(2009, 4, 1);

@@ -73,7 +73,6 @@ namespace Lotto
             HtmlNodeCollection nodesSeparateDraws = document.DocumentNode.SelectNodes("//ul[@style='position: relative;']");
             HtmlNodeCollection nodesPluses = document.DocumentNode.SelectNodes("(//ul[@style='position: relative;']/div/li[contains(@class, 'plus')]) | (//ul[@style='position: relative;']/div/li/span[contains(@class, 'plus')])");
             List<string> listSeparatedDraws = new List<string>();
-
             AddValuesToList(listSeparatedDraws, nodesSeparateDraws, nodesPluses);
             return listSeparatedDraws;
         }
