@@ -37,7 +37,7 @@ namespace Lotto
         }
 
         // Sends List<> of all draws to SQL database
-        public void ExportDrawsListToSQL(string url = ConvertHTMLDrawsToXML.SOURCE_LINK_TO_ALL)
+        public void ExportDrawsListToSQL(List<Draw> drawsList)
         {
             using (SqlConnection conn = new SqlConnection(this.connectionString.ToString()))
             {
@@ -55,16 +55,16 @@ namespace Lotto
                 DataTable dt = dataSetLosowania.Tables[this.connectionString.tableName];
                 int counter = 0; //Counter for displaying process of adding new rows to a database in a console windows
 
-                foreach (var los in ConvertHTMLDrawsToXML.GetDrawsList(url, false, "TestReference.html", true)) //Adding new rows to a dataset
+                foreach (var los in drawsList) //Adding new rows to a dataset
                 {
                     DataRow newRow = dt.NewRow();
-                    newRow["NrLosowania"] = los.NrLosowania;
-                    newRow["DataLosowania"] = los.DataLosowania;
+                    newRow["NrLosowania"] = los.DrawNo;
+                    newRow["DataLosowania"] = los.DrawDate;
                     if (los.Plus != null)
                         newRow["Plus"] = los.Plus;
                     for (int i = 1; i <= 20; i++) //Loop for adding data fill columns from "Liczba1" to "Liczba20"
                     {
-                        newRow[string.Format("Liczba{0}", i.ToString())] = los.Liczby[i - 1];
+                        newRow[string.Format("Liczba{0}", i.ToString())] = los.Numbers[i - 1];
                     }
                     dt.Rows.Add(newRow);
 
@@ -90,13 +90,6 @@ namespace Lotto
                 conn.Close();
             }
         }
-
-        /*public void UpdateDatabase(SQLUtils.ConnectionString connectionString, string tableName)
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString.ToString())
-            {
-                string lastDrawDate = "" 
-            }*/
     }
         
 }

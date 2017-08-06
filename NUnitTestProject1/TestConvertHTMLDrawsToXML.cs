@@ -9,52 +9,53 @@ namespace Lotto
     [TestFixture]
     public class TestConvertHTMLDrawsToXML
     {
-        static List<Losowanie> listMixed;
-        static List<Losowanie> listWithPlus;
-        static List<Losowanie> listWithoutPlus;
+        static List<Draw> listMixed;
+        static List<Draw> listWithPlus;
+        static List<Draw> listWithoutPlus;
+        static List<Draw> listSmallMixed;
 
-
-        private void runTest(List<Losowanie> dataList, int drawNumber, int [] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
+        private void runTest(List<Draw> dataList, int drawNumber, int [] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
         {
-            Losowanie draw = dataList.Select(d => d).Where(d => d.NrLosowania == drawNumber).First();
+            Draw draw = dataList.Select(d => d).Where(d => d.DrawNo == drawNumber).First();
             DateTime dateTime = new DateTime(date[2], date[1], date[0], date[3], date[4], 0);
             #region Assertions
-            Assert.AreEqual(drawNumber, draw.NrLosowania, "Parameter {0} does not match.", "Draw number");
-            Assert.AreEqual(dateTime, draw.DataLosowania, "Parameter {0} does not match.", "Draw date");
+            Assert.AreEqual(drawNumber, draw.DrawNo, "Parameter {0} does not match.", "Draw number");
+            Assert.AreEqual(dateTime, draw.DrawDate, "Parameter {0} does not match.", "Draw date");
             Assert.AreEqual(plus, draw.Plus, "Parameter {0} does not match.", "plus");
-            Assert.AreEqual(number1, draw.Liczby[0], "Parameter {0} does not match.", "Number 1");
-            Assert.AreEqual(number2, draw.Liczby[1], "Parameter {0} does not match.", "Number 2");
-            Assert.AreEqual(number3, draw.Liczby[2], "Parameter {0} does not match.", "Number 3");
-            Assert.AreEqual(number4, draw.Liczby[3], "Parameter {0} does not match.", "Number 4");
-            Assert.AreEqual(number5, draw.Liczby[4], "Parameter {0} does not match.", "Number 5");
-            Assert.AreEqual(number6, draw.Liczby[5], "Parameter {0} does not match.", "Number 6");
-            Assert.AreEqual(number7, draw.Liczby[6], "Parameter {0} does not match.", "Number 7");
-            Assert.AreEqual(number8, draw.Liczby[7], "Parameter {0} does not match.", "Number 8");
-            Assert.AreEqual(number9, draw.Liczby[8], "Parameter {0} does not match.", "Number 9");
-            Assert.AreEqual(number10, draw.Liczby[9], "Parameter {0} does not match.", "Number 10");
-            Assert.AreEqual(number11, draw.Liczby[10], "Parameter {0} does not match.", "Number 11");
-            Assert.AreEqual(number12, draw.Liczby[11], "Parameter {0} does not match.", "Number 12");
-            Assert.AreEqual(number13, draw.Liczby[12], "Parameter {0} does not match.", "Number 13");
-            Assert.AreEqual(number14, draw.Liczby[13], "Parameter {0} does not match.", "Number 14");
-            Assert.AreEqual(number15, draw.Liczby[14], "Parameter {0} does not match.", "Number 15");
-            Assert.AreEqual(number16, draw.Liczby[15], "Parameter {0} does not match.", "Number 16");
-            Assert.AreEqual(number17, draw.Liczby[16], "Parameter {0} does not match.", "Number 17");
-            Assert.AreEqual(number18, draw.Liczby[17], "Parameter {0} does not match.", "Number 18");
-            Assert.AreEqual(number19, draw.Liczby[18], "Parameter {0} does not match.", "Number 19");
-            Assert.AreEqual(number20, draw.Liczby[19], "Parameter {0} does not match.", "Number 20");
+            Assert.AreEqual(number1, draw.Numbers[0], "Parameter {0} does not match.", "Number 1");
+            Assert.AreEqual(number2, draw.Numbers[1], "Parameter {0} does not match.", "Number 2");
+            Assert.AreEqual(number3, draw.Numbers[2], "Parameter {0} does not match.", "Number 3");
+            Assert.AreEqual(number4, draw.Numbers[3], "Parameter {0} does not match.", "Number 4");
+            Assert.AreEqual(number5, draw.Numbers[4], "Parameter {0} does not match.", "Number 5");
+            Assert.AreEqual(number6, draw.Numbers[5], "Parameter {0} does not match.", "Number 6");
+            Assert.AreEqual(number7, draw.Numbers[6], "Parameter {0} does not match.", "Number 7");
+            Assert.AreEqual(number8, draw.Numbers[7], "Parameter {0} does not match.", "Number 8");
+            Assert.AreEqual(number9, draw.Numbers[8], "Parameter {0} does not match.", "Number 9");
+            Assert.AreEqual(number10, draw.Numbers[9], "Parameter {0} does not match.", "Number 10");
+            Assert.AreEqual(number11, draw.Numbers[10], "Parameter {0} does not match.", "Number 11");
+            Assert.AreEqual(number12, draw.Numbers[11], "Parameter {0} does not match.", "Number 12");
+            Assert.AreEqual(number13, draw.Numbers[12], "Parameter {0} does not match.", "Number 13");
+            Assert.AreEqual(number14, draw.Numbers[13], "Parameter {0} does not match.", "Number 14");
+            Assert.AreEqual(number15, draw.Numbers[14], "Parameter {0} does not match.", "Number 15");
+            Assert.AreEqual(number16, draw.Numbers[15], "Parameter {0} does not match.", "Number 16");
+            Assert.AreEqual(number17, draw.Numbers[16], "Parameter {0} does not match.", "Number 17");
+            Assert.AreEqual(number18, draw.Numbers[17], "Parameter {0} does not match.", "Number 18");
+            Assert.AreEqual(number19, draw.Numbers[18], "Parameter {0} does not match.", "Number 19");
+            Assert.AreEqual(number20, draw.Numbers[19], "Parameter {0} does not match.", "Number 20");
             #endregion
         }
 
         [OneTimeSetUp]
-        public void RunBeforeAnyTests()
+        public void setUp()
         {
             string projectPath = Directory.GetParent(Path.GetDirectoryName(typeof(TestConvertHTMLDrawsToXML).Assembly.Location)).Parent.FullName + @"\Reference data";
             string mixedURL = SQLUtils.CreateLinkToSourceHTML(new DateTime(1996, 3, 18), new DateTime(2017, 7, 26, 23, 59, 59));
             string withPlusURL = SQLUtils.CreateLinkToSourceHTML(new DateTime(2009, 3, 30), new DateTime(2017, 7, 26, 23, 59, 59));
             string withoutPlusURL = SQLUtils.CreateLinkToSourceHTML(new DateTime(1996, 3, 18), new DateTime(2009, 3, 30, 23, 59, 59));
-            listMixed = ConvertHTMLDrawsToXML.GetDrawsList(url: mixedURL, useLocalFile: true, localFilePath: projectPath + @"\test_mixed.html");
-            listWithPlus = ConvertHTMLDrawsToXML.GetDrawsList(url: withPlusURL, useLocalFile: true, localFilePath: projectPath +@"\test_with_plus.html");
-            listWithoutPlus = ConvertHTMLDrawsToXML.GetDrawsList(url: withoutPlusURL, useLocalFile: true, localFilePath: projectPath + @"\test_without_plus.html");
+            listMixed = ConvertHTMLDraws.ConvertToList(url: mixedURL, useLocalFile: true, localFilePath: projectPath + @"\TestReference.html");
+            listWithPlus = ConvertHTMLDraws.ConvertToList(url: withPlusURL, useLocalFile: true, localFilePath: projectPath + @"\TestReference.html");
+            listWithoutPlus = ConvertHTMLDraws.ConvertToList(url: withoutPlusURL, useLocalFile: true, localFilePath: projectPath + @"\TestReference.html");
+            listSmallMixed = ConvertHTMLDraws.ConvertToList(url: "http://megalotto.pl/wyniki/multi-multi/losowania-od-24-Marca-2009-do-4-Kwietnia-2009", useLocalFile: false, localFilePath: null);// projectPath + @"\TestReference.html");
         }
         
         #region TestCases
@@ -88,11 +89,11 @@ namespace Lotto
         [TestCase(63, new int[] { 9, 7, 1996, 0, 0 }, null, 5, 8, 9, 21, 24, 25, 29, 30, 34, 40, 45, 46, 47, 48, 53, 61, 63, 69, 73, 75)]
         [TestCase(3127, new int[] { 26, 11, 2005, 0, 0 }, null, 3, 6, 10, 12, 16, 25, 30, 33, 35, 36, 43, 51, 54, 59, 62, 63, 64, 68, 69, 74)]
         #endregion
+        // Draws 1 - 10350
         public void TestMixed(int drawNumber, int[] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
         {
             runTest(listMixed, drawNumber, date, plus, number1, number2, number3, number4, number5, number6, number7, number8, number9, number10, number11, number12, number13, number14, number15,  number16, number17, number18, number19, number20);
         }
-
 
         #region TestCases
         [TestCase(10350, new int[] { 26, 7, 2017, 14, 0 }, 73, 10, 11, 12, 15, 21, 24, 27, 30, 38, 39, 46, 56, 62, 66, 69, 73, 74, 76, 78, 79)]
@@ -112,6 +113,7 @@ namespace Lotto
         [TestCase(6153, new int[] { 27, 10, 2011, 22, 15 }, 62, 3, 4, 14, 15, 21, 27, 31, 39, 44, 47, 48, 57, 58, 62, 70, 71, 73, 77, 79, 80)]
 
         #endregion
+        // Draws 4347 - 10350
         public void TestWithPlus(int drawNumber, int[] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
         {
             runTest(listWithPlus, drawNumber, date, plus, number1, number2, number3, number4, number5, number6, number7, number8, number9, number10, number11, number12, number13, number14, number15, number16, number17, number18, number19, number20);
@@ -134,9 +136,30 @@ namespace Lotto
         [TestCase(63, new int[] { 9, 7, 1996, 0, 0 }, null, 5, 8, 9, 21, 24, 25, 29, 30, 34, 40, 45, 46, 47, 48, 53, 61, 63, 69, 73, 75)]
         [TestCase(3127, new int[] { 26, 11, 2005, 0, 0 }, null, 3, 6, 10, 12, 16, 25, 30, 33, 35, 36, 43, 51, 54, 59, 62, 63, 64, 68, 69, 74)]
         #endregion
+        // Draws 1 - 4347
         public void TestWithoutPlus(int drawNumber, int[] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
         {
             runTest(listWithoutPlus, drawNumber, date, plus, number1, number2, number3, number4, number5, number6, number7, number8, number9, number10, number11, number12, number13, number14, number15, number16, number17, number18, number19, number20);
+        }
+
+        #region TestCases
+        //[TestCase(4341, new int[] { 24, 3, 2009, 0, 0 }, null, 4, 12, 14, 23, 25, 27, 28, 34, 38, 40, 45, 47, 48, 50, 58, 59, 62, 66, 68, 80)]
+        //[TestCase(4342, new int[] { 25, 3, 2009, 0, 0 }, null, 1, 3, 20, 21, 32, 35, 41, 42, 48, 50, 51, 53, 54, 58, 60, 64, 67, 73, 74, 79)]
+        //[TestCase(4343, new int[] { 26, 3, 2009, 0, 0 }, null, 10, 13, 16, 18, 22, 25, 27, 29, 32, 39, 42, 44, 50, 57, 61, 63, 68, 75, 77, 78)]
+        //[TestCase(4344, new int[] { 27, 3, 2009, 0, 0 }, null, 5, 9, 18, 25, 28, 29, 39, 45, 46, 47, 51, 56, 64, 66, 67, 68, 70, 76, 78, 79)]
+        //[TestCase(4345, new int[] { 28, 3, 2009, 0, 0 }, null, 2, 5, 9, 12, 15, 17, 19, 20, 30, 31, 32, 44, 45, 47, 54, 57, 61, 68, 70, 74)]
+        [TestCase(4346, new int[] { 29, 3, 2009, 0, 0 }, null, 6, 7, 9, 16, 17, 19, 22, 26, 27, 35, 40, 45, 46, 47, 53, 55, 56, 59, 60, 61)]
+        //[TestCase(4347, new int[] { 30, 3, 2009, 0, 0 }, 36, 3, 7, 24, 28, 30, 35, 36, 38, 42, 44, 59, 63, 64, 65, 71, 75, 77, 78, 79, 80)]
+        //[TestCase(4348, new int[] { 31, 3, 2009, 0, 0 }, 42, 2, 13, 15, 24, 25, 27, 42, 43, 45, 47, 49, 50, 52, 60, 61, 65, 69, 70, 71, 73)]
+        //[TestCase(4349, new int[] { 1, 4, 2009, 0, 0 }, 35, 1, 3, 9, 15, 21, 23, 24, 25, 30, 32, 35, 36, 38, 40, 46, 57, 63, 67, 72, 77)]
+        //[TestCase(4350, new int[] { 2, 4, 2009, 0, 0 }, 42, 1, 4, 7, 13, 14, 15, 17, 22, 25, 32, 34, 37, 42, 47, 53, 57, 69, 71, 73, 77)]
+        //[TestCase(4351, new int[] { 3, 4, 2009, 0, 0 }, 46, 1, 5, 15, 16, 19, 23, 24, 30, 33, 36, 43, 45, 46, 52, 58, 67, 72, 75, 76, 80)]
+        //[TestCase(4352, new int[] { 4, 4, 2009, 0, 0 }, 31, 3, 9, 10, 14, 20, 22, 26, 31, 34, 39, 44, 47, 48, 52, 61, 64, 65, 71, 78, 79)]
+        #endregion
+        // Draws 4341 - 4352
+        public void TestSmallMixed(int drawNumber, int[] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
+        {
+            runTest(listSmallMixed, drawNumber, date, plus, number1, number2, number3, number4, number5, number6, number7, number8, number9, number10, number11, number12, number13, number14, number15, number16, number17, number18, number19, number20);
         }
     }
 }
