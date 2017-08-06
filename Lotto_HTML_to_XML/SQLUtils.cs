@@ -12,12 +12,12 @@ namespace Lotto
     {
         public const string databaseFolderPath = @"C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRESS\MSSQL\DATA\";
 
-        //Creates new database. Returns 0 if succeded, throws an exception failed
-        public static int CreateNewDatabase(ConnectionString connectionString, string folder)
+        //Creates new database. Returns 0 if succeded, throws an exception if failed
+        public static int CreateNewDatabase(ConnectionString connectionString)
         {
             string newDatabaseName = connectionString.databaseName;
             connectionString.databaseName = "master";
-            string str = string.Format(@"CREATE DATABASE {0}", newDatabaseName, folder);
+            string str = string.Format(@"CREATE DATABASE {0}", newDatabaseName);
             
             using (SqlConnection con = new SqlConnection(connectionString.ToString()))
             {
@@ -41,7 +41,7 @@ namespace Lotto
             }
         }
 
-        // Checks if connection succeded
+        // Checks if connection with a database succeded
         public static bool IsServerConnected(string connectionString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -79,7 +79,7 @@ namespace Lotto
             return string.Format("http://megalotto.pl/wyniki/multi-multi/losowania-od-{0}-do-{1}", ConvertDateToLinkString(from), ConvertDateToLinkString(to));
         }
 
-        public static string ConvertDateToLinkString(DateTime dt)
+        private static string ConvertDateToLinkString(DateTime dt)
         {
             string monthName = "";
             switch (dt.Month)
@@ -140,11 +140,7 @@ namespace Lotto
             }
             public override string ToString()
             {
-                if (this.tableName == null)
-                    return string.Format(@"Server={0};Database={1};Trusted_Connection={2}", this.serverName, this.databaseName, this.trustedConnection.ToString());
-                else
-                    return string.Format(@"Server={0};Database={1};Database={2};Trusted_Connection={3}", this.serverName, this.databaseName, this.tableName, this.trustedConnection.ToString());
-
+                return string.Format(@"Server={0};Database={1};Trusted_Connection={2}", this.serverName, this.databaseName, this.trustedConnection.ToString());
             }
         }
     }

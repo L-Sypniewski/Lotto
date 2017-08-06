@@ -5,33 +5,38 @@ using System.Xml.Serialization;
 namespace Lotto
 {
     [Serializable]
-    public class Losowanie
+    public class Draw
     {
         [XmlAttribute("ID")]
-        public ushort NrLosowania { get; set; }
+        public ushort DrawNo { get; set; }
 
-        [XmlElement("Data")]
-        public DateTime DataLosowania { get; set; }
+        [XmlElement("Date")]
+        public DateTime DrawDate { get; set; }
 
         [XmlElement(ElementName = "Plus", IsNullable = true)]
         public byte? Plus { get; set; }
 
-        [XmlArray("Liczby")]
-        [XmlArrayItem("L")]
-        public List<byte> Liczby { get; set; }
+        [XmlArray("Numbers")]
+        [XmlArrayItem("N", typeof(byte))]
+        public List<byte> Numbers { get; set; }
 
-        public Losowanie()
+        public Draw()
         {
-            Liczby = new List<byte>(20);
+            Numbers = new List<byte>(20);
         }
 
-        public Losowanie(ushort dNrLosowania,DateTime dDataLosowania , byte? dPlus, List<byte> dLiczby)
+        public Draw(ushort dDrawNumber,DateTime dDrawDate , byte? dPlus, List<byte> dNumbers)
         {
-            Liczby = new List<byte>(20);
-            Liczby = dLiczby;
-            NrLosowania = dNrLosowania;
-            DataLosowania = dDataLosowania;
+            Numbers = new List<byte>(20);
+            Numbers = dNumbers;
+            DrawNo = dDrawNumber;
+            DrawDate = dDrawDate;
             Plus = dPlus;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("DrawNo: {0}, DrawDate: {1}, Plus: {2}", this.DrawNo.ToString(), this.DrawDate.ToString(), this.Plus.ToString());
         }
     }
 }
