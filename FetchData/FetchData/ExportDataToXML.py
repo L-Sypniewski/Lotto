@@ -12,7 +12,7 @@ for i in range(0, number_of_days_to_process):
     date = date + datetime.timedelta(days=-1)
     print("{0}\{1}".format(i+1, number_of_days_to_process))
 
-DownloadData.MakePrettyXML(r"F:\filename.xml")
+DownloadData.MakePrettyXML(r"F:\filename.xml", '_pretty')
 
 
 

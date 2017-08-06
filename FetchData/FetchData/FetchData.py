@@ -123,14 +123,16 @@ class DownloadData(object):
             DownloadData.AddDataToNewXML(file_path, draw_data)
 
 
-    def MakePrettyXML(file_path):
+    def MakePrettyXML(file_path, file_path_suffix='_PrettyPrinted'):
         xml = ET.parse(file_path)
         root = xml.getroot()
         xmlstr = ET.tostring(root)
         dom = minidom.parseString(xmlstr)
         pretty_xml = dom.toprettyxml().encode('utf-8')
         prety_xml_unicode = etree.tostring(etree.fromstring(pretty_xml), xml_declaration=True, encoding='utf-8').decode()
-        with open(file_path, "w", "utf-8") as f:
+
+
+        with open(file_path[:len(file_path) - 4] + file_path_suffix + '.xml', "w", "utf-8") as f:
             f.write(prety_xml_unicode)
 
     def SaveDrawToXML(file_path, draw_date : datetime, create_new_file : bool):
@@ -138,7 +140,7 @@ class DownloadData(object):
             html = DownloadData.GetHTML(date=draw_date.strftime('%Y-%m-%d'))
             if html != "":
                 break
-            time.sleep(.300)
+            time.sleep(1) # server denies access if there are too many request in a short time
         if html == "No draws":
             return None
         draws = DownloadData.SeparateDrawsToList(html)
