@@ -2647,3 +2647,114 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Micro
 2017-08-05T22:30:32: [WARNING] Library was set explicitly - skipping path detection
 2017-08-05T22:30:32: IncludeModulesFromModulePath = win32com
 2017-08-05T22:30:32: Deleting 0 files
+
+2017-08-06T16:32:47: Start analysis
+2017-08-06T16:32:47: [WARNING] Library was set explicitly - skipping path detection
+2017-08-06T16:32:47: IncludeModulesFromModulePath = win32com
+2017-08-06T16:32:47: Deleting 31 files
+2017-08-06T16:32:48: Scraping lxml.etree
+2017-08-06T16:32:48: Command: "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Scripts\python.exe" "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\ExtensionScraper.py" scrape lxml.etree "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages" "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\.ptvs\lxml\lxml.etree"
+2017-08-06T16:32:48: Scraping lxml.objectify
+2017-08-06T16:32:48: Command: "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Scripts\python.exe" "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\Microsoft\Python Tools for Visual Studio\2.2\ExtensionScraper.py" scrape lxml.objectify "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages" "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\.ptvs\lxml\lxml.objectify"
+2017-08-06T16:32:48: Scraped 2 files
+2017-08-06T16:32:48: astropy.CallDepth = 0
+2017-08-06T16:32:48: matplotlib.CallDepth = 3
+2017-08-06T16:32:48: pandas.CallDepth = 0
+2017-08-06T16:32:48: sympy.CallDepth = 0
+2017-08-06T16:32:48: Start group "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml" with 24 files
+2017-08-06T16:32:48: Parsing "lxml.builder" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\builder.py")
+2017-08-06T16:32:48: Parsing "lxml.cssselect" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\cssselect.py")
+2017-08-06T16:32:48: Parsing "lxml.doctestcompare" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\doctestcompare.py")
+2017-08-06T16:32:48: Parsing "lxml.ElementInclude" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\ElementInclude.py")
+2017-08-06T16:32:48: Parsing "lxml.pyclasslookup" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\pyclasslookup.py")
+2017-08-06T16:32:48: Parsing "lxml.sax" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\sax.py")
+2017-08-06T16:32:48: Parsing "lxml.usedoctest" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\usedoctest.py")
+2017-08-06T16:32:48: Parsing "lxml._elementpath" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\_elementpath.py")
+2017-08-06T16:32:48: Parsing "lxml" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\__init__.py")
+2017-08-06T16:32:48: Parsing "lxml.html.builder" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\builder.py")
+2017-08-06T16:32:48: Parsing "lxml.html.clean" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\clean.py")
+2017-08-06T16:32:48: Parsing "lxml.html.defs" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\defs.py")
+2017-08-06T16:32:48: Parsing "lxml.html.diff" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\diff.py")
+2017-08-06T16:32:48: Parsing "lxml.html.ElementSoup" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\ElementSoup.py")
+2017-08-06T16:32:48: Parsing "lxml.html.formfill" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\formfill.py")
+2017-08-06T16:32:48: Parsing "lxml.html.html5parser" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\html5parser.py")
+2017-08-06T16:32:48: Parsing "lxml.html.soupparser" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\soupparser.py")
+2017-08-06T16:32:48: Parsing "lxml.html.usedoctest" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\usedoctest.py")
+2017-08-06T16:32:48: Parsing "lxml.html._diffcommand" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\_diffcommand.py")
+2017-08-06T16:32:48: Parsing "lxml.html._html5builder" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\_html5builder.py")
+2017-08-06T16:32:48: Parsing "lxml.html._setmixin" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\_setmixin.py")
+2017-08-06T16:32:48: Parsing "lxml.html" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\html\__init__.py")
+2017-08-06T16:32:48: Parsing "lxml.includes" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\includes\__init__.py")
+2017-08-06T16:32:48: Parsing "lxml.isoschematron" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml\isoschematron\__init__.py")
+2017-08-06T16:32:48: Parsing complete
+2017-08-06T16:32:48: Analyzing "lxml.builder"
+2017-08-06T16:32:48: Analyzing "lxml.cssselect"
+2017-08-06T16:32:48: Analyzing "lxml.doctestcompare"
+2017-08-06T16:32:48: Analyzing "lxml.ElementInclude"
+2017-08-06T16:32:48: Analyzing "lxml.pyclasslookup"
+2017-08-06T16:32:48: Analyzing "lxml.sax"
+2017-08-06T16:32:48: Analyzing "lxml.usedoctest"
+2017-08-06T16:32:48: Analyzing "lxml._elementpath"
+2017-08-06T16:32:48: Analyzing "lxml"
+2017-08-06T16:32:48: Analyzing "lxml.html.builder"
+2017-08-06T16:32:48: Analyzing "lxml.html.clean"
+2017-08-06T16:32:48: Analyzing "lxml.html.defs"
+2017-08-06T16:32:48: Analyzing "lxml.html.diff"
+2017-08-06T16:32:48: Analyzing "lxml.html.ElementSoup"
+2017-08-06T16:32:48: Analyzing "lxml.html.formfill"
+2017-08-06T16:32:48: Analyzing "lxml.html.html5parser"
+2017-08-06T16:32:48: Analyzing "lxml.html.soupparser"
+2017-08-06T16:32:48: Analyzing "lxml.html.usedoctest"
+2017-08-06T16:32:48: Analyzing "lxml.html._diffcommand"
+2017-08-06T16:32:48: Analyzing "lxml.html._html5builder"
+2017-08-06T16:32:48: Analyzing "lxml.html._setmixin"
+2017-08-06T16:32:48: Analyzing "lxml.html"
+2017-08-06T16:32:48: Analyzing "lxml.includes"
+2017-08-06T16:32:48: Analyzing "lxml.isoschematron"
+2017-08-06T16:32:48: Starting analysis of 24 modules
+2017-08-06T16:32:50: Analysis complete
+2017-08-06T16:32:50: Saving group "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml"
+2017-08-06T16:32:50: End of group "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\lxml"
+2017-08-06T16:32:50: Start group "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests" with 18 files
+2017-08-06T16:32:50: Parsing "requests.adapters" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\adapters.py")
+2017-08-06T16:32:50: Parsing "requests.api" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\api.py")
+2017-08-06T16:32:50: Parsing "requests.auth" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\auth.py")
+2017-08-06T16:32:50: Parsing "requests.certs" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\certs.py")
+2017-08-06T16:32:50: Parsing "requests.compat" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\compat.py")
+2017-08-06T16:32:50: Parsing "requests.cookies" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\cookies.py")
+2017-08-06T16:32:50: Parsing "requests.exceptions" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\exceptions.py")
+2017-08-06T16:32:50: Parsing "requests.help" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\help.py")
+2017-08-06T16:32:50: Parsing "requests.hooks" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\hooks.py")
+2017-08-06T16:32:50: Parsing "requests.models" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\models.py")
+2017-08-06T16:32:50: Parsing "requests.packages" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\packages.py")
+2017-08-06T16:32:50: Parsing "requests.sessions" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\sessions.py")
+2017-08-06T16:32:50: Parsing "requests.status_codes" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\status_codes.py")
+2017-08-06T16:32:50: Parsing "requests.structures" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\structures.py")
+2017-08-06T16:32:50: Parsing "requests.utils" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\utils.py")
+2017-08-06T16:32:50: Parsing "requests._internal_utils" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\_internal_utils.py")
+2017-08-06T16:32:50: Parsing "requests" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\__init__.py")
+2017-08-06T16:32:50: Parsing "requests.__version__" ("C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests\__version__.py")
+2017-08-06T16:32:50: Parsing complete
+2017-08-06T16:32:50: Analyzing "requests.adapters"
+2017-08-06T16:32:50: Analyzing "requests.api"
+2017-08-06T16:32:50: Analyzing "requests.auth"
+2017-08-06T16:32:50: Analyzing "requests.certs"
+2017-08-06T16:32:50: Analyzing "requests.compat"
+2017-08-06T16:32:50: Analyzing "requests.cookies"
+2017-08-06T16:32:50: Analyzing "requests.exceptions"
+2017-08-06T16:32:50: Analyzing "requests.help"
+2017-08-06T16:32:50: Analyzing "requests.hooks"
+2017-08-06T16:32:50: Analyzing "requests.models"
+2017-08-06T16:32:50: Analyzing "requests.packages"
+2017-08-06T16:32:50: Analyzing "requests.sessions"
+2017-08-06T16:32:50: Analyzing "requests.status_codes"
+2017-08-06T16:32:50: Analyzing "requests.structures"
+2017-08-06T16:32:50: Analyzing "requests.utils"
+2017-08-06T16:32:50: Analyzing "requests._internal_utils"
+2017-08-06T16:32:50: Analyzing "requests"
+2017-08-06T16:32:50: Analyzing "requests.__version__"
+2017-08-06T16:32:50: Starting analysis of 18 modules
+2017-08-06T16:32:52: Analysis complete
+2017-08-06T16:32:52: Saving group "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests"
+2017-08-06T16:32:52: End of group "C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv\Lib\site-packages\requests"
+2017-08-06T16:32:52: Deleting 0 files

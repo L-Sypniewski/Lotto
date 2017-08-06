@@ -1,6 +1,7 @@
 from xml.dom import minidom
 from datetime import datetime
 from operator import itemgetter
+from codecs import open
 import lxml.etree as etree
 import xml.etree.cElementTree as ET
 import re
@@ -8,7 +9,7 @@ import urllib
 import re
 import time
 import requests
-from codecs import open
+
 
 class DownloadData(object):
 
@@ -35,8 +36,10 @@ class DownloadData(object):
             raw_html = "No draws"
         return raw_html
 
+
     def SeparateDrawsToList(html):        
         return re.findall(r'<tr>(.*?)</tr>', html)
+
 
     def ExtractDrawData(html):
         regex_with_plus = r'<td>(?P<DrawNo>\d{1,5})<br.*?<br />(?P<DrawDate>\d{2}-\d{2}-\d{2}),.*?, (?P<DrawTime>\d{2}:\d{2}).*?i\">(?P<Number1>\d{1,2})</div.*?i\">(?P<Number2>\d{1,2})</div.*?i\">(?P<Number3>\d{1,2})</div.*?i\">(?P<Number4>\d{1,2})</div.*?i\">(?P<Number5>\d{1,2})</div.*?i\">(?P<Number6>\d{1,2})</div.*?i\">(?P<Number7>\d{1,2})</div.*?i\">(?P<Number8>\d{1,2})</div.*?i\">(?P<Number9>\d{1,2})</div.*?i\">(?P<Number10>\d{1,2})</div.*?i\">(?P<Number11>\d{1,2})</div.*?i\">(?P<Number12>\d{1,2})</div.*?i\">(?P<Number13>\d{1,2})</div.*?i\">(?P<Number14>\d{1,2})</div.*?i\">(?P<Number15>\d{1,2})</div.*?i\">(?P<Number16>\d{1,2})</div.*?i\">(?P<Number17>\d{1,2})</div.*?i\">(?P<Number18>\d{1,2})</div.*?i\">(?P<Number19>\d{1,2})</div.*?i\">(?P<Number20>\d{1,2})</div.*?plus\">(?P<Plus>\d{1,2})</div>'
@@ -60,9 +63,11 @@ class DownloadData(object):
         else:
             full_date = date[:6] + "19" + date[6:]
         return full_date    
+
       
     def ConvertToDate(date):
         return datetime.strptime(date, '%Y-%m-%d')
+
 
     def ConvertFullDateTimeToISO(date):
         return datetime.isoformat(datetime.strptime(date, '%d-%m-%Y %H:%M'))  
@@ -79,16 +84,8 @@ class DownloadData(object):
 
     def AddDataToNewXML(file_path, draw_data):
         formatted_date_time =  DownloadData.ConvertFullDateTimeToISO(draw_data['DrawDate'] + ' ' + draw_data['DrawTime'])
-
-
-        #root = etree.Element(DownloadData.XSI + "Draws")
-        
         root = etree.Element("Draws")
-
         draw_elem = etree.SubElement(root, "Draw", ID=draw_data['DrawNo'])
-
-        
-
         etree.SubElement(draw_elem, "Date").text = formatted_date_time
         if 'Plus' in draw_data:
             etree.SubElement(draw_elem, "Plus").text = draw_data['Plus']
@@ -157,26 +154,3 @@ class DownloadData(object):
                 DownloadData.AddDataToNewXML(file_path, extracted_data_list_sorted[i])
             else:
                 DownloadData.AddDataToExistingXML(file_path, extracted_data_list_sorted[i])
-
-
-#def AddDataToExistingXML(file_path, draw_data):
-#        try:
-#            xml = ET.parse(file_path)
-#            root = xml.getroot()
-#            formatted_date_time =  DownloadData.ConvertFullDateTimeToISO(draw_data['DrawDate'] + ' ' + draw_data['DrawTime'])
-#            doc = ET.SubElement(root, "Draw", ID=draw_data['DrawNo'])
-#            ET.SubElement(doc, "Date").text = formatted_date_time
-#            if 'Plus' in draw_data:
-#                ET.SubElement(doc, "Plus").text = draw_data['Plus']
-#            else:
-#                ET.SubElement(doc, "Plus").text = ' xsi:nil=' + '\"' + 'true' + '\"' + ' '
-#            numbers = ET.SubElement(doc, "Numbers")
-#            for i in range (1, 21):
-#                ET.SubElement(numbers, 'N').text = draw_data['Number' + str(i)]
-#            xmlstr = ET.tostring(root)
-#            string = etree.tostring(etree.fromstring(xmlstr)).decode()
-#            with open(file_path, "w") as f:
-#                f.write(string)
-#        except FileNotFoundError:
-#            print('File {file_path} has not been found! New file {file_path} will be created.'.format(file_path=file_path))
-#            DownloadData.AddDataToNewXML(file_path, draw_data)
