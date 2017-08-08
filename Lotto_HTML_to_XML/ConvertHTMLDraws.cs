@@ -42,7 +42,7 @@ namespace Lotto
         //Deserializes XML file and returns its content to List<> of draws
         public static List<Draw> DeserializeXML()
         {
-            string path = @"F:\filename.xml";
+            string path = @"F:\filename_pretty.xml";
             List<Draw> draws;
             using (var reader = new StreamReader(path))
             {
