@@ -171,23 +171,17 @@ class DownloadData(object):
             date_to = date_to + DT.timedelta(days=-1)
 
 
-##################################################################
-
-
     def Update(file_path, draw_date : datetime):
-
         xml = etree.parse(file_path)
         root = xml.getroot()  
         last_draw_number = int(xml.xpath("//Draw[1]/@ID")[0])
-        last_draw_date =  datetime.strptime(str(xml.xpath("//Draw[1]/Date/text()")[0]), "%Y-%m-%dT%H:%M:%S")
-        number_of_days_to_check = DownloadData.GetDaysBetweenDates(DownloadData.DATE_TODAY, last_draw_date) + 1
 
         while True:            
             html = DownloadData.GetHTML(date=draw_date.strftime('%Y-%m-%d'))
             time.sleep(0.3)
             if html != "":
                 break
-            time.sleep(1) # server denies access if there are too many request in a short time
+            time.sleep(0.5) # server denies access if there are too many request in a short time
         if html == "No draws":
             return None
 
@@ -203,10 +197,11 @@ class DownloadData(object):
             if int(extracted_data[0][0]["DrawNo"]) > last_draw_number:
                 extracted_data_list.append(extracted_data[0][0])
         if extracted_data_list != []:
-            extracted_data_list_sorted = sorted(extracted_data_list, key=itemgetter('DrawNo'), reverse=True)
+            extracted_data_list_sorted = sorted(extracted_data_list, key=itemgetter('DrawNo'))
             for i in range(0, len(extracted_data_list_sorted)):
                 DownloadData.AddDataToExistingXML(file_path, extracted_data_list_sorted[i], True)
        
+    
     def UpdateToXML(file_path):
         xml = etree.parse(file_path)
         root = xml.getroot()
@@ -215,5 +210,5 @@ class DownloadData(object):
 
         number_of_days_to_process = DownloadData.GetDaysBetweenDates(date_today, last_draw_date) + 1
         for i in range(0, number_of_days_to_process):
-            DownloadData.Update(file_path, date_today)
-        date_today = date_today + DT.timedelta(days=-1)     
+            DownloadData.Update(file_path, last_draw_date)
+            last_draw_date = last_draw_date + DT.timedelta(days=1)     
