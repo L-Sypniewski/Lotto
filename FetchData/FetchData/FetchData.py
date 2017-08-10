@@ -15,16 +15,16 @@ import requests
 class DownloadData(object):
 
     DATE_TODAY = datetime.now().replace(hour=23, minute=59)
-    DATE_OF_FIRST_DRAW = datetime.strptime('1996-03-17', '%Y-%m-%d')
-    XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
-    XSI = "{%s}" % XSI_NAMESPACE
-    NSMAP = {None : XSI_NAMESPACE} # the default namespace (no prefix)
+    DATE_OF_FIRST_DRAW = datetime.strptime('1996-03-18', '%Y-%m-%d')
+    __XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
+    __XSI = "{%s}" % __XSI_NAMESPACE
+    __NSMAP = {None : __XSI_NAMESPACE} # the default namespace (no prefix)
 
 
-    def GetHTML(date):
+    def __SendHTTPRequest(date : str):
         url = 'http://www.lotto.pl/multi-multi/wyniki-i-wygrane/wyszukaj'
-        datas = {'data_losowania[date]': date, 'form_id':'multimulti_wyszukaj_form'}
-        r = requests.post(url, data=datas, allow_redirects=True)
+        dict_data = {'data_losowania[date]': date, 'form_id':'multimulti_wyszukaj_form'}
+        r = requests.post(url, data=dict_data, allow_redirects=True)
         doc = r.text
         tree = etree.HTML(doc)
         raw_html = ''
@@ -37,12 +37,24 @@ class DownloadData(object):
             raw_html = "No draws"
         return raw_html
 
+    def __DownloadSource(draw_date : datetime):
+        while True:            
+            html = DownloadData.__SendHTTPRequest(date=draw_date.strftime('%Y-%m-%d'))
+            time.sleep(0.7)
+            if html != "":
+                break
+            time.sleep(1) # server denies access if there are too many request in a short time
+        if html == "No draws":
+            return None
+        draws = DownloadData.__SeparateDrawsToList(html)
+        return DownloadData.__ExtractDrawData(draws)
 
-    def SeparateDrawsToList(html):        
+
+    def __SeparateDrawsToList(html : str):        
         return re.findall(r'<tr>(.*?)</tr>', html)
 
 
-    def ExtractDrawData(html):
+    def __ExtractDrawData(html : str):
         regex_with_plus = r'<td>(?P<DrawNo>\d{1,5})<br.*?<br />(?P<DrawDate>\d{2}-\d{2}-\d{2}),.*?, (?P<DrawTime>\d{2}:\d{2}).*?i\">(?P<Number1>\d{1,2})</div.*?i\">(?P<Number2>\d{1,2})</div.*?i\">(?P<Number3>\d{1,2})</div.*?i\">(?P<Number4>\d{1,2})</div.*?i\">(?P<Number5>\d{1,2})</div.*?i\">(?P<Number6>\d{1,2})</div.*?i\">(?P<Number7>\d{1,2})</div.*?i\">(?P<Number8>\d{1,2})</div.*?i\">(?P<Number9>\d{1,2})</div.*?i\">(?P<Number10>\d{1,2})</div.*?i\">(?P<Number11>\d{1,2})</div.*?i\">(?P<Number12>\d{1,2})</div.*?i\">(?P<Number13>\d{1,2})</div.*?i\">(?P<Number14>\d{1,2})</div.*?i\">(?P<Number15>\d{1,2})</div.*?i\">(?P<Number16>\d{1,2})</div.*?i\">(?P<Number17>\d{1,2})</div.*?i\">(?P<Number18>\d{1,2})</div.*?i\">(?P<Number19>\d{1,2})</div.*?i\">(?P<Number20>\d{1,2})</div.*?plus\">(?P<Plus>\d{1,2})</div>'
         regex_without_plus = r'<td>(?P<DrawNo>\d{1,5})<br.*?<br />(?P<DrawDate>\d{2}-\d{2}-\d{2}),.*?, (?P<DrawTime>\d{2}:\d{2}).*?i\">(?P<Number1>\d{1,2})</div.*?i\">(?P<Number2>\d{1,2})</div.*?i\">(?P<Number3>\d{1,2})</div.*?i\">(?P<Number4>\d{1,2})</div.*?i\">(?P<Number5>\d{1,2})</div.*?i\">(?P<Number6>\d{1,2})</div.*?i\">(?P<Number7>\d{1,2})</div.*?i\">(?P<Number8>\d{1,2})</div.*?i\">(?P<Number9>\d{1,2})</div.*?i\">(?P<Number10>\d{1,2})</div.*?i\">(?P<Number11>\d{1,2})</div.*?i\">(?P<Number12>\d{1,2})</div.*?i\">(?P<Number13>\d{1,2})</div.*?i\">(?P<Number14>\d{1,2})</div.*?i\">(?P<Number15>\d{1,2})</div.*?i\">(?P<Number16>\d{1,2})</div.*?i\">(?P<Number17>\d{1,2})</div.*?i\">(?P<Number18>\d{1,2})</div.*?i\">(?P<Number19>\d{1,2})</div.*?i\">(?P<Number20>\d{1,2})</div'
         pattern_with_plus = re.compile(regex_with_plus)
@@ -51,14 +63,14 @@ class DownloadData(object):
         for i in range(len(html)):
            if "plus" in html[i]:
                result.append([m.groupdict() for m in pattern_with_plus.finditer(html[i])])
-               result[i][0]['DrawDate'] = DownloadData.ConvertToFullDate(result[i][0]['DrawDate'])
+               result[i][0]['DrawDate'] = DownloadData.__ConvertToFullDate(result[i][0]['DrawDate'])
            else:
                result.append([m.groupdict() for m in pattern_without_plus.finditer(html[i])])
-               result[i][0]['DrawDate'] = DownloadData.ConvertToFullDate(result[i][0]['DrawDate'])
-        return result  # result[1][0]['DrawDate']
+               result[i][0]['DrawDate'] = DownloadData.__ConvertToFullDate(result[i][0]['DrawDate'])
+        return result
 
 
-    def ConvertToFullDate(date : str): 
+    def __ConvertToFullDate(date : str): 
         if date[6] != '9':
             full_date = date[:6] + "20" + date[6:]
         else:
@@ -66,15 +78,15 @@ class DownloadData(object):
         return full_date    
 
       
-    def ConvertToDate(date):
+    def ConvertToDateTime(date : str):
         return datetime.strptime(date, '%Y-%m-%d')
 
 
-    def ConvertFullDateTimeToISO(date):
+    def __ConvertFullDateTimeToISO(date : str):
         return datetime.isoformat(datetime.strptime(date, '%d-%m-%Y %H:%M'))  
 
 
-    def GetDaysBetweenDates(date_from : datetime, date_to : datetime):
+    def __GetNumberOfCalendarDaysBetweenDates(date_from : datetime, date_to : datetime):
         date_from = date_from.replace(hour=0, minute=0)
         date_to = date_to.replace(hour=0, minute=0)
         if date_from > date_to:
@@ -83,15 +95,15 @@ class DownloadData(object):
             return (date_to - date_from).days
 
 
-    def AddDataToNewXML(file_path, draw_data):
-        formatted_date_time =  DownloadData.ConvertFullDateTimeToISO(draw_data['DrawDate'] + ' ' + draw_data['DrawTime'])
+    def __AddDataToNewXML(file_path : str, draw_data : list):
+        formatted_date_time =  DownloadData.__ConvertFullDateTimeToISO(draw_data['DrawDate'] + ' ' + draw_data['DrawTime'])
         root = etree.Element("Draws")
         draw_elem = etree.SubElement(root, "Draw", ID=draw_data['DrawNo'])
         etree.SubElement(draw_elem, "Date").text = formatted_date_time
         if 'Plus' in draw_data:
             etree.SubElement(draw_elem, "Plus").text = draw_data['Plus']
         else:
-            etree.SubElement(draw_elem, "Plus", attrib = {DownloadData.XSI + "nil" : "true"} )
+            etree.SubElement(draw_elem, "Plus", attrib = {DownloadData.__XSI + "nil" : "true"} )
         numbers_elem = etree.SubElement(draw_elem, "Numbers")
         for i in range (1, 21):
             etree.SubElement(numbers_elem, 'N').text = draw_data['Number' + str(i)]
@@ -101,19 +113,19 @@ class DownloadData(object):
             f.write(string)
 
 
-    def AddDataToExistingXML(file_path, draw_data, insert_as_first = False):
+    def __AddDataToExistingXML(file_path : str, draw_data : list, insert_as_first = False):
         try:
             xml = etree.parse(file_path)
             root = xml.getroot()            
-            formatted_date_time =  DownloadData.ConvertFullDateTimeToISO(draw_data['DrawDate'] + ' ' + draw_data['DrawTime'])
+            formatted_date_time =  DownloadData.__ConvertFullDateTimeToISO(draw_data['DrawDate'] + ' ' + draw_data['DrawTime'])
             draw_elem = etree.SubElement(root, "Draw", ID=draw_data['DrawNo'])
-            if insert_as_first == True:   # to append data at the beginning while updating         
+            if insert_as_first == True:   # to append data at the beginning (for updating purposes)
                 root.insert(0,draw_elem)           
             etree.SubElement(draw_elem, "Date").text = formatted_date_time
             if 'Plus' in draw_data:
                 etree.SubElement(draw_elem, "Plus").text = draw_data['Plus']
             else:
-                etree.SubElement(draw_elem, "Plus", attrib = {DownloadData.XSI + "nil" : "true"} )
+                etree.SubElement(draw_elem, "Plus", attrib = {DownloadData.__XSI + "nil" : "true"} )
             numbers_elem = etree.SubElement(draw_elem, "Numbers")
             for i in range (1, 21):
                 etree.SubElement(numbers_elem, 'N').text = draw_data['Number' + str(i)]
@@ -123,10 +135,31 @@ class DownloadData(object):
                 f.write(string)
         except FileNotFoundError:
             print('File {file_path} has not been found! New file {file_path} will be created.'.format(file_path=file_path))
-            DownloadData.AddDataToNewXML(file_path, draw_data)
+            DownloadData.__AddDataToNewXML(file_path, draw_data)
 
 
-    def MakePrettyXML(file_path, file_path_suffix='_PrettyPrinted'):
+    def __Update(file_path : str, draw_date : datetime):
+        xml = etree.parse(file_path)
+        root = xml.getroot()  
+        last_draw_number = int(xml.xpath("//Draw[1]/@ID")[0])
+        extracted_data = DownloadData.__DownloadSource(draw_date)       
+        extracted_data_list = []
+        if extracted_data is not None:
+            if len(extracted_data) == 2:
+                if int(extracted_data[0][0]["DrawNo"]) > last_draw_number:
+                    extracted_data_list.append(extracted_data[0][0])
+                if int(extracted_data[1][0]["DrawNo"]) > last_draw_number:
+                    extracted_data_list.append(extracted_data[1][0])
+            else:
+                if int(extracted_data[0][0]["DrawNo"]) > last_draw_number:
+                    extracted_data_list.append(extracted_data[0][0])
+            if extracted_data_list != []:
+                extracted_data_list_sorted = sorted(extracted_data_list, key=itemgetter('DrawNo'))
+                for i in range(0, len(extracted_data_list_sorted)):
+                    DownloadData.__AddDataToExistingXML(file_path, extracted_data_list_sorted[i], True)
+
+
+    def MakePrettyXML(file_path : str, file_path_suffix='_PrettyPrinted'):
         xml = ET.parse(file_path)
         root = xml.getroot()
         xmlstr = ET.tostring(root)
@@ -137,78 +170,45 @@ class DownloadData(object):
             f.write(prety_xml_unicode)
 
 
-    def SaveDrawToXML(file_path, draw_date : datetime, create_new_file : bool):
-        while True:            
-            html = DownloadData.GetHTML(date=draw_date.strftime('%Y-%m-%d'))
-            time.sleep(0.3)
-            if html != "":
-                break
-            time.sleep(1) # server denies access if there are too many request in a short time
-        if html == "No draws":
-            return None
-        draws = DownloadData.SeparateDrawsToList(html)
-        extracted_data = DownloadData.ExtractDrawData(draws)        
-        extracted_data_list = []
-        if len(extracted_data) == 2:
-            extracted_data_list = [extracted_data[0][0], extracted_data[1][0]]
-        else:
-             extracted_data_list = [extracted_data[0][0]] 
-        extracted_data_list_sorted = sorted(extracted_data_list, key=itemgetter('DrawNo'), reverse=True)
-        for i in range(0, len(extracted_data_list_sorted)):
-            if create_new_file == True and i == 0:
-                DownloadData.AddDataToNewXML(file_path, extracted_data_list_sorted[i])
+    def SaveDrawsFromDateToXML(file_path : str, draw_date : datetime, create_new_file : bool):
+        extracted_data = DownloadData.__DownloadSource(draw_date)
+        if extracted_data is not None:        
+            extracted_data_list = []
+            if len(extracted_data) == 2:
+                extracted_data_list = [extracted_data[0][0], extracted_data[1][0]]
             else:
-                DownloadData.AddDataToExistingXML(file_path, extracted_data_list_sorted[i])
+                 extracted_data_list = [extracted_data[0][0]] 
+            extracted_data_list_sorted = sorted(extracted_data_list, key=itemgetter('DrawNo'), reverse=True)
+            for i in range(0, len(extracted_data_list_sorted)):
+                if create_new_file == True and i == 0:
+                    DownloadData.__AddDataToNewXML(file_path, extracted_data_list_sorted[i])
+                else:
+                    DownloadData.__AddDataToExistingXML(file_path, extracted_data_list_sorted[i])
 
 
     def SaveDrawsFromDateRangeToXML(date_from : datetime, date_to : datetime, file_path, update_file : bool): # TODO exception if date_from > date_to
-        number_of_days_to_process = DownloadData.GetDaysBetweenDates(date_from, date_to) + 1
+        number_of_days_to_process = DownloadData.__GetNumberOfCalendarDaysBetweenDates(date_from, date_to) + 1
         for i in range(0, number_of_days_to_process):
             if update_file == False and i == 0:
-                DownloadData.SaveDrawToXML(file_path, date_to, True)
+                DownloadData.SaveDrawsFromDateToXML(file_path, date_to, True)
             else:
-                DownloadData.SaveDrawToXML(file_path, date_to, False)
+                DownloadData.SaveDrawsFromDateToXML(file_path, date_to, False)
             date_to = date_to + DT.timedelta(days=-1)
-
-
-    def Update(file_path, draw_date : datetime):
-        xml = etree.parse(file_path)
-        root = xml.getroot()  
-        last_draw_number = int(xml.xpath("//Draw[1]/@ID")[0])
-
-        while True:            
-            html = DownloadData.GetHTML(date=draw_date.strftime('%Y-%m-%d'))
-            time.sleep(0.3)
-            if html != "":
-                break
-            time.sleep(0.5) # server denies access if there are too many request in a short time
-        if html == "No draws":
-            return None
-
-        draws = DownloadData.SeparateDrawsToList(html)
-        extracted_data = DownloadData.ExtractDrawData(draws)        
-        extracted_data_list = []
-        if len(extracted_data) == 2:
-            if int(extracted_data[0][0]["DrawNo"]) > last_draw_number:
-                extracted_data_list.append(extracted_data[0][0])
-            if int(extracted_data[1][0]["DrawNo"]) > last_draw_number:
-                extracted_data_list.append(extracted_data[1][0])
-        else:
-            if int(extracted_data[0][0]["DrawNo"]) > last_draw_number:
-                extracted_data_list.append(extracted_data[0][0])
-        if extracted_data_list != []:
-            extracted_data_list_sorted = sorted(extracted_data_list, key=itemgetter('DrawNo'))
-            for i in range(0, len(extracted_data_list_sorted)):
-                DownloadData.AddDataToExistingXML(file_path, extracted_data_list_sorted[i], True)
+            print("Processed {0}\{1} days".format(i+1, number_of_days_to_process))
        
     
-    def UpdateToXML(file_path):
+    def UpdateXML(file_path : str):
         xml = etree.parse(file_path)
         root = xml.getroot()
         last_draw_date =  datetime.strptime(str(xml.xpath("//Draw[1]/Date/text()")[0]), "%Y-%m-%dT%H:%M:%S")
         date_today = DownloadData.DATE_TODAY
-
-        number_of_days_to_process = DownloadData.GetDaysBetweenDates(date_today, last_draw_date) + 1
+        number_of_days_to_process = DownloadData.__GetNumberOfCalendarDaysBetweenDates(date_today, last_draw_date) + 1
         for i in range(0, number_of_days_to_process):
-            DownloadData.Update(file_path, last_draw_date)
-            last_draw_date = last_draw_date + DT.timedelta(days=1)     
+            DownloadData.__Update(file_path, last_draw_date)
+            last_draw_date = last_draw_date + DT.timedelta(days=1)
+            print("Processed {0}\{1} days".format(i+1, number_of_days_to_process))
+
+            
+    def DownloadAllDraws(file_path : str):
+         DownloadData.SaveDrawsFromDateToXML(file_path, DownloadData.DATE_OF_FIRST_DRAW, True)
+         DownloadData.UpdateXML(file_path)
