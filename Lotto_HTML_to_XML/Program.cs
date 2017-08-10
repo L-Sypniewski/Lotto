@@ -11,7 +11,7 @@ namespace Lotto
         static void Main(string[] args)
         {
             ExportDrawsToSQL exportToSQL = new ExportDrawsToSQL(new SQLUtils.ConnectionString(@"Praca-Laptop\SQLEXPRESS", "WynikiLotto", true, "RawData"));
-            exportToSQL.ExportDrawsListToSQL(ConvertHTMLDraws.DeserializeXML());
+            exportToSQL.ExportDrawsListToSQL(LoadXML.DeserializeXML());
             Console.WriteLine("Done");
             Console.ReadKey();
         }

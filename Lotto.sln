@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTMLParseAndExport", "Lotto_HTML_to_XML\HTMLParseAndExport.csproj", "{6CB7FD97-8769-48F0-A12B-4B327B133C23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportXMLToSQL", "Lotto_HTML_to_XML\ExportXMLToSQL.csproj", "{6CB7FD97-8769-48F0-A12B-4B327B133C23}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{CDABFB25-6915-4430-BF8B-9162282A2402}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DrawsDatabase", "Database\DrawsDatabase.sqlproj", "{CDABFB25-6915-4430-BF8B-9162282A2402}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "NUnitTestProject1\UnitTests.csproj", "{067456C0-086C-46A8-B37F-1405717B7BFC}"
 EndProject

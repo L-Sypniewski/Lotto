@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>de3bdabb-e5db-4c72-823c-7e316968aed2</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>FetchData\ExportDataToXML.py</StartupFile>
+    <StartupFile>FetchData\ExportToXML.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -27,7 +27,7 @@
     <Compile Include="FetchData\FetchData.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FetchData\ExportDataToXML.py" />
+    <Compile Include="FetchData\ExportToXML.py" />
     <Compile Include="FetchData\__init__.py">
       <SubType>Code</SubType>
     </Compile>

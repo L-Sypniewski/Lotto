@@ -8,7 +8,7 @@ using Lotto;
 namespace Lotto
 {
     [TestFixture]
-    public class TestConvertHTMLDrawsToXML
+    public class TestLoadXML
     {
         static List<Draw> list;
 
@@ -46,11 +46,11 @@ namespace Lotto
         [OneTimeSetUp]
         public void setUp()
         {
-            string projectPath = Directory.GetParent(Path.GetDirectoryName(typeof(TestConvertHTMLDrawsToXML).Assembly.Location)).Parent.FullName + @"\Reference data";
+            string projectPath = Directory.GetParent(Path.GetDirectoryName(typeof(TestLoadXML).Assembly.Location)).Parent.FullName + @"\Reference data";
             string mixedURL = SQLUtils.CreateLinkToSourceHTML(new DateTime(1996, 3, 18), new DateTime(2017, 7, 26, 23, 59, 59));
             string withPlusURL = SQLUtils.CreateLinkToSourceHTML(new DateTime(2009, 3, 30), new DateTime(2017, 7, 26, 23, 59, 59));
             string withoutPlusURL = SQLUtils.CreateLinkToSourceHTML(new DateTime(1996, 3, 18), new DateTime(2009, 3, 30, 23, 59, 59));
-            listMixed = new List<Draws>;
+            List<Draw> listMixed = new List<Draw>();
         }
         
         #region TestCases

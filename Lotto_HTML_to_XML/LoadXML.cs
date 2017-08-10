@@ -10,10 +10,10 @@ using System.Linq;
 
 namespace Lotto
 {
-    public static class ConvertHTMLDraws
+    public static class LoadXML
     {     
 
-        // Serializes List<Losowanie> to an XML and saves it to a file
+        // Serializes List<Draw> to an XML and saves it to a file
         private static void SerializeToXMLAndSaveToFile(List<Draw> drawsList, string xmlPath = @"Losowania.xml")
         {
             XmlRootAttribute oRootAttr = new XmlRootAttribute();

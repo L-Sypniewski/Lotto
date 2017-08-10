@@ -44,7 +44,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestConvertHTMLDrawsToXML.cs" />
+    <Compile Include="TestLoadXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

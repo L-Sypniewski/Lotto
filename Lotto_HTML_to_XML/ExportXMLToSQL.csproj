@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6CB7FD97-8769-48F0-A12B-4B327B133C23}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lotto</RootNamespace>
     <AssemblyName>Lotto</AssemblyName>
@@ -59,8 +59,8 @@
     </Compile>
     <Compile Include="DownloadSource.cs" />
     <Compile Include="ExportDrawsToSQL.cs" />
-    <Compile Include="Losowanie.cs" />
-    <Compile Include="ConvertHTMLDraws.cs" />
+    <Compile Include="Draw.cs" />
+    <Compile Include="LoadXML.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
