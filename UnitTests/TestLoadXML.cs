@@ -12,8 +12,9 @@ namespace Lotto
     {
         static List<Draw> list;
 
-        private void runTest(List<Draw> dataList, int drawNumber, int [] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
+        private void runTest(List<Draw> dataList, int drawNumber, int[] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
         {
+            Lotto.
             Draw draw = dataList.Select(d => d).Where(d => d.DrawNo == drawNumber).First();
             DateTime dateTime = new DateTime(date[2], date[1], date[0], date[3], date[4], 0);
             #region Assertions
@@ -50,9 +51,9 @@ namespace Lotto
             string mixedURL = SQLUtils.CreateLinkToSourceHTML(new DateTime(1996, 3, 18), new DateTime(2017, 7, 26, 23, 59, 59));
             string withPlusURL = SQLUtils.CreateLinkToSourceHTML(new DateTime(2009, 3, 30), new DateTime(2017, 7, 26, 23, 59, 59));
             string withoutPlusURL = SQLUtils.CreateLinkToSourceHTML(new DateTime(1996, 3, 18), new DateTime(2009, 3, 30, 23, 59, 59));
-            List<Draw> listMixed = new List<Draw>();
+            List<Draw> list = new List<Draw>();
         }
-        
+
         #region TestCases
         [TestCase(1, new int[] { 18, 3, 1996, 0, 0 }, null, 4, 9, 10, 16, 21, 22, 23, 26, 27, 34, 35, 41, 42, 48, 62, 66, 68, 73, 76, 78)]
         [TestCase(10350, new int[] { 26, 7, 2017, 14, 0 }, 73, 10, 11, 12, 15, 21, 24, 27, 30, 38, 39, 46, 56, 62, 66, 69, 73, 74, 76, 78, 79)]
@@ -87,8 +88,8 @@ namespace Lotto
         // Draws 1 - 10350
         public void TestDraws(int drawNumber, int[] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
         {
-            runTest(listMixed, drawNumber, date, plus, number1, number2, number3, number4, number5, number6, number7, number8, number9, number10, number11, number12, number13, number14, number15,  number16, number17, number18, number19, number20);
+            runTest(list, drawNumber, date, plus, number1, number2, number3, number4, number5, number6, number7, number8, number9, number10, number11, number12, number13, number14, number15, number16, number17, number18, number19, number20);
+        }
     }
 }
-
 

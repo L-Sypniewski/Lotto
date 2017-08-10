@@ -14,6 +14,7 @@
     <RootNamespace>FetchData</RootNamespace>
     <InterpreterId>{6c8916a0-e082-4e0c-98db-022ed9441505}</InterpreterId>
     <InterpreterVersion>3.5</InterpreterVersion>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>

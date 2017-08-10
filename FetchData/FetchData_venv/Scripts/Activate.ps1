@@ -27,7 +27,7 @@ function global:deactivate ([switch]$NonDestructive) {
 
 deactivate -nondestructive
 
-$env:VIRTUAL_ENV="C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto_HTML_to_XML\FetchData\FetchData_venv"
+$env:VIRTUAL_ENV="C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto\FetchData\FetchData_venv"
 
 # Set the prompt to include the env name
 # Make sure _OLD_VIRTUAL_PROMPT is global
