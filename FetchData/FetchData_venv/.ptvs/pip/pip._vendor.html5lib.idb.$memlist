@@ -9,7 +9,7 @@ serialize
 treeadapters
 parseFragment
 constants
-trie
+treebuilders
 absolute_import
 __all__
 parse
@@ -26,4 +26,4 @@ getTreeWalker
 sanitizer
 serializer
 filters
-treebuilders
+trie

@@ -5,12 +5,16 @@ import datetime as DT
 from codecs import open
 import lxml.etree as etree
 import xml.etree.cElementTree as ET
+import sys
 import re
 import urllib
 import re
 import time
 import requests
 
+from pathlib import Path
+import os
+import sys
 
 class DownloadData(object):
 
@@ -134,7 +138,7 @@ class DownloadData(object):
             with open(file_path, "w") as f:
                 f.write(string)
         except FileNotFoundError:
-            print('File {file_path} has not been found! New file {file_path} will be created.'.format(file_path=file_path))
+            print('File {file_path} has not been found! New file {file_path} will be created.'.format(file_path=file_path), flush=True)
             DownloadData.__AddDataToNewXML(file_path, draw_data)
 
 
@@ -194,7 +198,7 @@ class DownloadData(object):
             else:
                 DownloadData.SaveDrawsFromDateToXML(file_path, date_to, False)
             date_to = date_to + DT.timedelta(days=-1)
-            print("Processed {0}\{1} days".format(i+1, number_of_days_to_process))
+            print("Processed {0}\{1} days".format(i+1, number_of_days_to_process), flush=True)
        
     
     def UpdateXML(file_path : str):
@@ -206,9 +210,45 @@ class DownloadData(object):
         for i in range(0, number_of_days_to_process):
             DownloadData.__Update(file_path, last_draw_date)
             last_draw_date = last_draw_date + DT.timedelta(days=1)
-            print("Processed {0}\{1} days".format(i+1, number_of_days_to_process))
+            print("Processed {0}\{1} days".format(i+1, number_of_days_to_process), flush=True)
 
             
     def DownloadAllDraws(file_path : str):
          DownloadData.SaveDrawsFromDateToXML(file_path, DownloadData.DATE_OF_FIRST_DRAW, True)
          DownloadData.UpdateXML(file_path)
+
+
+#args_list = list(sys.argv)
+#if len(args_list) <= 1:
+#    dir_path = str(Path(os.path.dirname(os.path.abspath(__file__))).parent.parent) + r'\ExportXMLToSQL\XML'
+#    file_path =  r"\filename.xml"
+#    path = dir_path + file_path
+#else:
+#    path = args_list[2]
+#print("""Downloading data from Lotto.pl server. Progress:
+#********************************************************************************""")
+#DownloadData.UpdateXML(path)
+#DownloadData.MakePrettyXML(path, '_pretty')
+
+args_list = list(sys.argv)
+if len(args_list) <= 2:
+    dir_path = str(Path(os.path.dirname(os.path.abspath(__file__))).parent.parent) + r'\ExportXMLToSQL\XML'
+    file_path =  r"\filename.xml"
+    path = dir_path + file_path
+else:
+    path = args_list[2]
+called_func = args_list[1][1:]
+
+print(called_func)
+print('Selected file:"{path}"'.format(path=path))
+if called_func == 'UPDATE_XML':    
+    print("""Downloading data from Lotto.pl server. Progress:
+********************************************************************************""")
+    DownloadData.UpdateXML(path)
+if called_func == 'DOWNLOAD_ALL_DRAWS':
+    print("""Downloading data from Lotto.pl server. Progress:
+********************************************************************************""")
+    DownloadData.DownloadAllDraws(path)
+if called_func == 'MAKE_PRETTY_XML':
+    print('File has been formated.')
+    DownloadData.MakePrettyXML(path)

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6CB7FD97-8769-48F0-A12B-4B327B133C23}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lotto</RootNamespace>
     <AssemblyName>Lotto</AssemblyName>
@@ -83,10 +83,13 @@
   <ItemGroup>
     <Content Include="SQL\ShowAll.sql" />
     <Content Include="SQL\Utils.sql" />
+    <Content Include="XML\filename.xml" />
+    <Content Include="XML\filename_pretty.xml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

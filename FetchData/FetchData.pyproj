@@ -5,7 +5,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>de3bdabb-e5db-4c72-823c-7e316968aed2</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>FetchData\ExportToXML.py</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -28,7 +29,6 @@
     <Compile Include="FetchData\FetchData.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FetchData\ExportToXML.py" />
     <Compile Include="FetchData\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FetchData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="requirements.txt" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
