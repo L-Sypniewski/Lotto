@@ -1,8 +1,9 @@
 from xml.dom import minidom
 from datetime import datetime
 from operator import itemgetter
-import datetime as DT
+from pathlib import Path
 from codecs import open
+import datetime as DT
 import lxml.etree as etree
 import xml.etree.cElementTree as ET
 import sys
@@ -11,8 +12,6 @@ import urllib
 import re
 import time
 import requests
-
-from pathlib import Path
 import os
 import sys
 
@@ -218,18 +217,6 @@ class DownloadData(object):
          DownloadData.UpdateXML(file_path)
 
 
-#args_list = list(sys.argv)
-#if len(args_list) <= 1:
-#    dir_path = str(Path(os.path.dirname(os.path.abspath(__file__))).parent.parent) + r'\ExportXMLToSQL\XML'
-#    file_path =  r"\filename.xml"
-#    path = dir_path + file_path
-#else:
-#    path = args_list[2]
-#print("""Downloading data from Lotto.pl server. Progress:
-#********************************************************************************""")
-#DownloadData.UpdateXML(path)
-#DownloadData.MakePrettyXML(path, '_pretty')
-
 args_list = list(sys.argv)
 if len(args_list) <= 2:
     dir_path = str(Path(os.path.dirname(os.path.abspath(__file__))).parent.parent) + r'\ExportXMLToSQL\XML'
@@ -240,7 +227,7 @@ else:
 called_func = args_list[1][1:]
 
 print(called_func)
-print('Selected file:"{path}"'.format(path=path))
+print('Selected file:"{path}"\n'.format(path=path))
 if called_func == 'UPDATE_XML':    
     print("""Downloading data from Lotto.pl server. Progress:
 ********************************************************************************""")

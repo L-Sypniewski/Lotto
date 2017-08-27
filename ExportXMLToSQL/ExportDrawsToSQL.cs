@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Lotto
 {
-    class ExportDrawsToSQL
+    public class ExportDrawsToSQL
     {
         public SQLUtils.ConnectionString connectionString { get; private set; }
 
@@ -32,12 +32,12 @@ namespace Lotto
             string del = string.Format(@"DELETE FROM {0};", this.connectionString.tableName);
             conn.Open();
             SqlCommand cmdDel = new SqlCommand(del, conn);
-            Console.WriteLine("Liczba usunietych rows: " + cmdDel.ExecuteNonQuery().ToString());
+            Console.WriteLine("Number of deleted rows: " + cmdDel.ExecuteNonQuery().ToString());
             conn.Close();
         }
 
         // Sends List<> of all draws to SQL database
-        public void ExportDrawsListToSQL(List<Draw> drawsList)
+        public void ExportDrawsListToSQL(List<Draw> drawsList, bool sortNumbers = false)
         {
             using (SqlConnection conn = new SqlConnection(this.connectionString.ToString()))
             {
@@ -47,16 +47,15 @@ namespace Lotto
 
                 DataSet dataSetLosowania = new DataSet();
                 SqlDataAdapter dataAdapterLosowanie = new SqlDataAdapter(qry, conn);
-
                 ClearTable(conn); //Clear table to avoid duplicating data
-
                 dataAdapterLosowanie.Fill(dataSetLosowania, this.connectionString.tableName);
-
                 DataTable dt = dataSetLosowania.Tables[this.connectionString.tableName];
-                int counter = 0; //Counter for displaying process of adding new rows to a database in a console windows
 
+                int counter = 0; //Counter for displaying process of adding new rows to a database in a console windows
                 foreach (var los in drawsList) //Adding new rows to a dataset
                 {
+                    if (sortNumbers == true)
+                        los.Numbers.Sort();
                     DataRow newRow = dt.NewRow();
                     newRow["NrLosowania"] = los.DrawNo;
                     newRow["DataLosowania"] = los.DrawDate;
@@ -67,9 +66,14 @@ namespace Lotto
                         newRow[string.Format("Liczba{0}", i.ToString())] = los.Numbers[i - 1];
                     }
                     dt.Rows.Add(newRow);
-
-                    Console.WriteLine("Dodano rząd " + (++counter).ToString());
+                    #if DEBUG
+                        Console.WriteLine("Added row " + (++counter).ToString());
+                    #else
+                        ++counter;
+                    #endif
+                  
                 }
+                Console.WriteLine(string.Format("\n{0} rows have been added.", counter.ToString()));
 
                 // Create command
                 SqlCommand cmd = new SqlCommand(qryInsertDataFromList, conn);
@@ -86,7 +90,6 @@ namespace Lotto
                 // Insert values
                 dataAdapterLosowanie.InsertCommand = cmd;
                 dataAdapterLosowanie.Update(dataSetLosowania, this.connectionString.tableName);
-
                 conn.Close();
             }
         }

@@ -73,59 +73,6 @@ namespace Lotto
             }
         }
 
-        // Creates link which allows to get html source of draws within a chosen data range
-        public static string CreateLinkToSourceHTML(DateTime from, DateTime to)
-        {
-            return string.Format("http://megalotto.pl/wyniki/multi-multi/losowania-od-{0}-do-{1}", ConvertDateToLinkString(from), ConvertDateToLinkString(to));
-        }
-
-        private static string ConvertDateToLinkString(DateTime dt)
-        {
-            string monthName = "";
-            switch (dt.Month)
-            {
-                #region Months
-                case 1:
-                    monthName = "Stycznia";
-                    break;
-                case 2:
-                    monthName = "Lutego";
-                    break;
-                case 3:
-                    monthName = "Marca";
-                    break;
-                case 4:
-                    monthName = "Kwietnia";
-                    break;
-                case 5:
-                    monthName = "Maja";
-                    break;
-                case 6:
-                    monthName = "Czerwca";
-                    break;
-                case 7:
-                    monthName = "Lipca";
-                    break;
-                case 8:
-                    monthName = "Sierpnia";
-                    break;
-                case 9:
-                    monthName = "Września";
-                    break;
-                case 10:
-                    monthName = "Października";
-                    break;
-                case 11:
-                    monthName = "Listopada";
-                    break;
-                case 12:
-                    monthName = "Grudnia";
-                    break;
-                    #endregion
-            }
-            return string.Format("{0}-{1}-{2}", dt.Day, monthName.ToString(), dt.Year);
-        }
-
         public struct ConnectionString
         {
             public string serverName, databaseName, tableName;

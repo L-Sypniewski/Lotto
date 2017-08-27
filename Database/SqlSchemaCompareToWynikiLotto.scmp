@@ -2,15 +2,15 @@
 <SchemaComparison>
   <Version>10</Version>
   <SourceModelProvider>
-    <ProjectBasedModelProvider>
-      <ProjectGuid>{cdabfb25-6915-4430-bf8b-9162282a2402}</ProjectGuid>
-      <Name>Database</Name>
-    </ProjectBasedModelProvider>
-  </SourceModelProvider>
-  <TargetModelProvider>
     <ConnectionBasedModelProvider>
       <ConnectionString>Data Source=PRACA-LAPTOP\SQLEXPRESS;Initial Catalog=WynikiLotto;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</ConnectionString>
     </ConnectionBasedModelProvider>
+  </SourceModelProvider>
+  <TargetModelProvider>
+    <ProjectBasedModelProvider>
+      <ProjectGuid>{cdabfb25-6915-4430-bf8b-9162282a2402}</ProjectGuid>
+      <Name>DrawsDatabase</Name>
+    </ProjectBasedModelProvider>
   </TargetModelProvider>
   <SchemaCompareSettingsService>
     <SchemaCompareSettingsService>
@@ -294,7 +294,7 @@
       </PropertyElementName>
       <PropertyElementName>
         <Name>TargetConnectionString</Name>
-        <Value>Data Source=PRACA-LAPTOP\SQLEXPRESS;Initial Catalog=WynikiLotto;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;Application Name="Microsoft SQL Server Data Tools, Schema Compare"</Value>
+        <Value>Integrated Security=True;Pooling=False;Connect Timeout=30</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>TreatVerificationErrorsAsWarnings</Name>

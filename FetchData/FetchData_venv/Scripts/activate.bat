@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=C:\Users\Sypcio\Documents\Dropbox\Docs\Programming\!Visual Studio 2015\Projects\Lotto\FetchData\FetchData_venv"
+set "VIRTUAL_ENV=C:\Users\Sypcio\Documents\Visual Studio git projects\Lotto\FetchData\FetchData_venv"
 
 if not defined PROMPT (
     set "PROMPT=$P$G"

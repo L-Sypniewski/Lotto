@@ -11,6 +11,7 @@ namespace Lotto
 {
     public static class LoadXML
     {     
+        // Enum used to define which function from the python script should be called
         public enum Functions
         {
             UPDATE_XML,
@@ -44,10 +45,10 @@ namespace Lotto
             }
         }
 
-        //Deserializes XML file and returns its content to List<> of draws
+        // Deserializes XML file and returns its content to List<> of draws
         public static List<Draw> DeserializeXML()
         {
-            string path = @"F:\filename_pretty.xml";
+            string path = @"C:\Users\Sypcio\Documents\Visual Studio git projects\Lotto\ExportXMLToSQL\XML\filename.xml";
             List<Draw> draws;
             using (var reader = new StreamReader(path))
             {
@@ -59,16 +60,15 @@ namespace Lotto
             return draws;
         }
 
-        //Runs python script which dowloads date from server and saves it to xml
-        public static void RunDownloadScript(string directory = null, string fileName = "filename.xml", Functions function = Functions.UPDATE_XML)
+        // Runs python script which dowloads date from server and saves it to xml
+        public static string[] RunDownloadScript(string directory = null, string fileName = "filename.xml", Functions function = Functions.UPDATE_XML)
         {
             string folderPath = directory;
             if (folderPath == null)
-                folderPath = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\XML\"));
+                folderPath = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\ExportXMLToSQL\XML\"));
             string filePath = fileName;
             string XMLpath = folderPath + filePath;
-            string ScriptPath = "\"C:\\Users\\Sypcio\\Documents\\Dropbox\\Docs\\Programming\\!Visual Studio 2015\\Projects\\Lotto\\FetchData\\FetchData\\FetchData.py\"";
-
+            string ScriptPath = "\"" + Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\FetchData\FetchData\FetchData.py")) + "\"";
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = "python.exe";
             start.Arguments = string.Format("{0} -{1} \"{2}\"", ScriptPath, function, XMLpath);
@@ -86,8 +86,8 @@ namespace Lotto
                 while (!proc.HasExited)
                     Console.WriteLine(q.ReadLine());
             }
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
+            Console.WriteLine(string.Format("Function {0} has finished\n", function.ToString()));
+            return new string[] { XMLpath, ScriptPath };
         }
 
         static public List<Draw> FilterDraws(List<Draw> list, int drawNumber)
@@ -104,5 +104,3 @@ namespace Lotto
         }
     }
 }
-
-

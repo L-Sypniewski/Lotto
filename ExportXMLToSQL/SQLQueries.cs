@@ -10,7 +10,7 @@ namespace Lotto
 {
     static class SQLQueries
     {
-        public static int procedure_CountEachNumberOccurencesReturn(string connectionString, int parameter)
+        public static int procedure_CountEachNumberOccurencesOutput(string connectionString, int parameter)
         {
             #region ReturnValue
             //using (SqlConnection cn = new SqlConnection(con))
@@ -109,7 +109,7 @@ namespace Lotto
                 {
                     if (i == 0)
                         sb.Append("{");
-                    sb.Append(SQLQueries.procedure_CountEachNumberOccurencesReturn(con.ToString(), k++));
+                    sb.Append(SQLQueries.procedure_CountEachNumberOccurencesOutput(con.ToString(), k++));
                     if (i != Columns - 1)
                         sb.Append(", ");
                     else
@@ -122,6 +122,24 @@ namespace Lotto
             sb.Append("}");
             file.WriteLine(sb.ToString());
             file.Close();
+        }
+
+        public static bool procedure_ValidateDatabaseRowNumbers(string connectionString)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand("procedure_ValidateDatabaseRowNumbers", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlParameter returnValue = new SqlParameter();
+                    returnValue.SqlDbType = SqlDbType.Int;
+                    returnValue.Direction = ParameterDirection.ReturnValue;
+                    cmd.Parameters.Add(returnValue);
+                    cmd.ExecuteNonQuery();
+                    return Convert.ToBoolean((int)returnValue.Value);
+                }
+            }
         }
     }
 }
