@@ -46,6 +46,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestSQL.cs" />
     <Compile Include="TestLoadXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

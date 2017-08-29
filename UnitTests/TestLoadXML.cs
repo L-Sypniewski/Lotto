@@ -12,6 +12,7 @@ namespace Lotto
     {
         static List<Draw> list;
         static List<Draw> list_sorted;
+        static Lotto.SQLUtils.ConnectionString connectionString = new SQLUtils.ConnectionString(@"Praca-Laptop\SQLEXPRESS", "WynikiLotto", true, "RawData");
 
         private void runTest(List<Draw> dataList, int drawNumber, int[] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
         {
@@ -48,8 +49,6 @@ namespace Lotto
         [OneTimeSetUp]
         public void setUp()
         {
-            string projectPath = Directory.GetParent(Path.GetDirectoryName(typeof(TestLoadXML).Assembly.Location)).Parent.FullName + @"\Reference data";
-            //Lotto.LoadXML.RunDownloadScript();
             list = LoadXML.DeserializeXML();
             list_sorted = LoadXML.DeserializeXML();
             foreach (var draw in list_sorted)
@@ -123,22 +122,30 @@ namespace Lotto
         }
 
         [Test]
-        public void TestExportDrawsListToSQL()
-        {
-            Lotto.SQLUtils.ConnectionString connStr = new SQLUtils.ConnectionString(@"Praca-Laptop\SQLEXPRESS", "WynikiLotto", true, "RawData");
-            Lotto.ExportDrawsToSQL exportDraws = new ExportDrawsToSQL(connStr);
-            exportDraws.ExportDrawsListToSQL(list);
-        }
-
-        [Test]
         public void TestRunDownloadScript()
         {
-            string[] updateResult = LoadXML.RunDownloadScript();
-            string[] makePrettyResult = LoadXML.RunDownloadScript(function: LoadXML.Functions.MAKE_PRETTY_XML);
-            List<string> filePaths = new List<string>(updateResult.Concat(makePrettyResult));
-            foreach(string s in filePaths)
+            using (StringWriter sw = new StringWriter())
             {
-                Assert.IsTrue(File.Exists(s.Trim('\"')), s.Trim('\"'));
+                Console.SetOut(sw);
+                string[] updateResult = LoadXML.RunDownloadScript();
+                string[] makePrettyResult = LoadXML.RunDownloadScript(function: LoadXML.Functions.MAKE_PRETTY_XML);
+                List<string> filePaths = new List<string>(updateResult.Concat(makePrettyResult));
+                foreach (string s in filePaths)
+                {
+                    Assert.IsTrue(File.Exists(s.Trim('\"')), s.Trim('\"'));
+                }
+                List<string> expected = sw.ToString().Split('\n').ToList<string>();
+                #region Assertions
+                Assert.AreEqual(expected[0], "UPDATE_XML\r");
+                Assert.AreEqual(expected[1], "Selected file:" + "\"" + "C:\\Users\\Sypcio\\Documents\\Visual Studio git projects\\Lotto\\ExportXMLToSQL\\XML\\filename.xml" + "\"" + "\r");
+                Assert.AreEqual(expected[3], "Downloading data from Lotto.pl server. Progress:\r");
+                Assert.AreEqual(expected[4], "********************************************************************************\r");
+                Assert.IsTrue(expected[5].Contains("Processed") & expected[5].Contains("days"));
+                Assert.AreEqual(expected[expected.Count - 10], "Function UPDATE_XML has finished");
+                Assert.AreEqual(expected[expected.Count - 8], "MAKE_PRETTY_XML\r");
+                Assert.AreEqual(expected[expected.Count - 5], "File has been formated.\r");
+                Assert.AreEqual(expected[expected.Count - 3], "Function MAKE_PRETTY_XML has finished");
+                #endregion
             }
         }
     }

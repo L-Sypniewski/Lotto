@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Lotto
 {
-    static class SQLQueries
+    public static class SQLQueries
     {
         public static int procedure_CountEachNumberOccurencesOutput(string connectionString, int parameter)
         {

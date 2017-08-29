@@ -10,8 +10,6 @@ namespace Lotto
 {
     public static class SQLUtils
     {
-        public const string databaseFolderPath = @"C:\Program Files\Microsoft SQL Server\MSSQL12.SQLEXPRESS\MSSQL\DATA\";
-
         //Creates new database. Returns 0 if succeded, throws an exception if failed
         public static int CreateNewDatabase(ConnectionString connectionString)
         {
