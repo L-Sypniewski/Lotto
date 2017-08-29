@@ -137,7 +137,7 @@ namespace Lotto
                 List<string> expected = sw.ToString().Split('\n').ToList<string>();
                 #region Assertions
                 Assert.AreEqual(expected[0], "UPDATE_XML\r");
-                Assert.AreEqual(expected[1], "Selected file:" + "\"" + "C:\\Users\\Sypcio\\Documents\\Visual Studio git projects\\Lotto\\ExportXMLToSQL\\XML\\filename.xml" + "\"" + "\r");
+                Assert.AreEqual(expected[1], "Selected file:" + "\"" + updateResult[0] + "\"" + "\r");
                 Assert.AreEqual(expected[3], "Downloading data from Lotto.pl server. Progress:\r");
                 Assert.AreEqual(expected[4], "********************************************************************************\r");
                 Assert.IsTrue(expected[5].Contains("Processed") & expected[5].Contains("days"));
