@@ -10,10 +10,10 @@ namespace Lotto
             //LoadXML.RunDownloadScript(function: LoadXML.Functions.MAKE_PRETTY_XML);
 
 
-            //ExportDrawsToSQL exportToSQL = new ExportDrawsToSQL(new SQLUtils.ConnectionString(@"Praca-Laptop\SQLEXPRESS", "WynikiLotto", true, "RawData"));
+            //ExportDrawsToSQL exportToSQL = new ExportDrawsToSQL(new SQLUtils.ConnectionString(@"(localdb)\MSSQLLocalDB", "Lotto", true, "RawData"));
             //exportToSQL.ExportDrawsListToSQL(LoadXML.DeserializeXML());
 
-            //bool c = SQLQueries.procedure_ValidateDatabaseRowNumbers(new SQLUtils.ConnectionString(@"Praca-Laptop\SQLEXPRESS", "WynikiLotto", true, "RawData").ToString());
+            //bool c = SQLQueries.procedure_ValidateDatabaseRowNumbers(new SQLUtils.ConnectionString(@"(localdb)\MSSQLLocalDB", "Lotto", true, "RawData").ToString());
 
             LoadXML.RunDownloadScript();
 

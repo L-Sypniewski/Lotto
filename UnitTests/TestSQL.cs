@@ -8,7 +8,7 @@ namespace Lotto
     {
         static List<Draw> list;
         static List<Draw> list_sorted;
-        static Lotto.SQLUtils.ConnectionString connectionString = new SQLUtils.ConnectionString(@"Praca-Laptop\SQLEXPRESS", "WynikiLotto", true, "RawData");
+        static Lotto.SQLUtils.ConnectionString connectionString = new SQLUtils.ConnectionString(@"(localdb)\MSSQLLocalDB", "Lotto", true, "RawData");
        
         [OneTimeSetUp]
         public void setUp()
@@ -19,7 +19,14 @@ namespace Lotto
             {
                 draw.Numbers.Sort();
             }
-        }       
+        }
+
+        [Test]
+        public void TestSQLConnection()
+        {
+            Lotto.ExportDrawsToSQL exportDraws = new ExportDrawsToSQL(connectionString);
+            Assert.IsTrue(SQLUtils.IsServerConnected(connectionString));
+        }
 
         [Test]
         public void TestExportDrawsListToSQL()

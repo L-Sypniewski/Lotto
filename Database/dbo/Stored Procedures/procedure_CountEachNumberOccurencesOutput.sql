@@ -3,8 +3,8 @@
 As
 SET NOCOUNT ON
 select  @count_number = count(*) from RawData
-                    where Liczba1 = @number or Liczba2 = @number  or Liczba3 = @number or Liczba4 = @number  
-					or Liczba5 = @number or Liczba6 = @number  or Liczba7 = @number or Liczba8 = @number
-					or Liczba9 = @number or Liczba10 = @number or Liczba11 = @number or Liczba12 = @number
-					or Liczba13 = @number or Liczba14 = @number or Liczba15 = @number or Liczba16 = @number
-					or Liczba17 = @number or Liczba18 = @number or Liczba19 = @number or Liczba20 = @number
+                    where Number1 = @number or Number2 = @number  or Number3 = @number or Number4 = @number  
+					or Number5 = @number or Number6 = @number  or Number7 = @number or Number8 = @number
+					or Number9 = @number or Number10 = @number or Number11 = @number or Number12 = @number
+					or Number13 = @number or Number14 = @number or Number15 = @number or Number16 = @number
+					or Number17 = @number or Number18 = @number or Number19 = @number or Number20 = @number

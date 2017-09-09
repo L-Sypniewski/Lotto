@@ -42,8 +42,8 @@ namespace Lotto
             using (SqlConnection conn = new SqlConnection(this.connectionString.ToString()))
             {
                 string qry = string.Format(@"select * from {0}", this.connectionString.tableName);
-                string qryInsertDataFromList = string.Format(@"insert into {0} (NrLosowania, DataLosowania, Plus, Liczba1, Liczba2, Liczba3, Liczba4, Liczba5, Liczba6, Liczba7, Liczba8, Liczba9,Liczba10, Liczba11, Liczba12, Liczba13, Liczba14, Liczba15, Liczba16, Liczba17, Liczba18, Liczba19, Liczba20) 
-                                                   values(@NrLosowania, @DataLosowania, @Plus, @Liczba1, @Liczba2, @Liczba3, @Liczba4, @Liczba5, @Liczba6, @Liczba7, @Liczba8, @Liczba9, @Liczba10, @Liczba11, @Liczba12, @Liczba13, @Liczba14, @Liczba15, @Liczba16, @Liczba17, @Liczba18, @Liczba19, @Liczba20)", this.connectionString.tableName);
+                string qryInsertDataFromList = string.Format(@"insert into {0} (DrawNo, DrawDate, Plus, Number1, Number2, Number3, Number4, Number5, Number6, Number7, Number8, Number9,Number10, Number11, Number12, Number13, Number14, Number15, Number16, Number17, Number18, Number19, Number20) 
+                                                   values(@DrawNo, @DrawDate, @Plus, @Number1, @Number2, @Number3, @Number4, @Number5, @Number6, @Number7, @Number8, @Number9, @Number10, @Number11, @Number12, @Number13, @Number14, @Number15, @Number16, @Number17, @Number18, @Number19, @Number20)", this.connectionString.tableName);
 
                 DataSet dataSetLosowania = new DataSet();
                 SqlDataAdapter dataAdapterLosowanie = new SqlDataAdapter(qry, conn);
@@ -57,13 +57,13 @@ namespace Lotto
                     if (sortNumbers == true)
                         los.Numbers.Sort();
                     DataRow newRow = dt.NewRow();
-                    newRow["NrLosowania"] = los.DrawNo;
-                    newRow["DataLosowania"] = los.DrawDate;
+                    newRow["DrawNo"] = los.DrawNo;
+                    newRow["DrawDate"] = los.DrawDate;
                     if (los.Plus != null)
                         newRow["Plus"] = los.Plus;
-                    for (int i = 1; i <= 20; i++) //Loop for adding data fill columns from "Liczba1" to "Liczba20"
+                    for (int i = 1; i <= 20; i++) //Loop for adding data fill columns from "Number1" to "Number20"
                     {
-                        newRow[string.Format("Liczba{0}", i.ToString())] = los.Numbers[i - 1];
+                        newRow[string.Format("Number{0}", i.ToString())] = los.Numbers[i - 1];
                     }
                     dt.Rows.Add(newRow);
                     #if DEBUG
@@ -79,12 +79,12 @@ namespace Lotto
                 SqlCommand cmd = new SqlCommand(qryInsertDataFromList, conn);
 
                 // Map parameters
-                cmd.Parameters.Add("@NrLosowania", SqlDbType.SmallInt, 15, "NrLosowania");
-                cmd.Parameters.Add("@DataLosowania", SqlDbType.DateTime, 15, "DataLosowania");
+                cmd.Parameters.Add("@DrawNo", SqlDbType.SmallInt, 15, "DrawNo");
+                cmd.Parameters.Add("@DrawDate", SqlDbType.DateTime, 15, "DrawDate");
                 cmd.Parameters.Add("@Plus", SqlDbType.TinyInt, 25, "Plus");
-                for (int i = 1; i <= 20; i++) //Loop for adding parameters "Liczba1" to "Liczba20"
+                for (int i = 1; i <= 20; i++) //Loop for adding parameters "Number1" to "Number20"
                 {
-                    cmd.Parameters.Add(string.Format("@Liczba{0}", i.ToString()), SqlDbType.TinyInt, 50, string.Format("Liczba{0}", i.ToString()));
+                    cmd.Parameters.Add(string.Format("@Number{0}", i.ToString()), SqlDbType.TinyInt, 50, string.Format("Number{0}", i.ToString()));
                 }
 
                 // Insert values
