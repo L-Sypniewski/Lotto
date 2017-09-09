@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using HtmlAgilityPack;
-using System.Text.RegularExpressions;
-using System.Globalization;
 using System.Xml.Serialization;
 using System.IO;
 using System.Linq;

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.IO;
-using Lotto;
 
 namespace Lotto
 {
@@ -12,7 +11,7 @@ namespace Lotto
     {
         static List<Draw> list;
         static List<Draw> list_sorted;
-        static Lotto.SQLUtils.ConnectionString connectionString = new SQLUtils.ConnectionString(@"(localdb)\MSSQLLocalDB", "Lotto", true, "RawData");
+        static SQLUtils.ConnectionString connectionString = new SQLUtils.ConnectionString(@"(localdb)\MSSQLLocalDB", "Lotto", true, "RawData");
 
         private void RunTest(List<Draw> dataList, int drawNumber, int[] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
         {

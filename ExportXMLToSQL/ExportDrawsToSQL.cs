@@ -45,11 +45,11 @@ namespace Lotto
                 string qryInsertDataFromList = string.Format(@"insert into {0} (DrawNo, DrawDate, Plus, Number1, Number2, Number3, Number4, Number5, Number6, Number7, Number8, Number9,Number10, Number11, Number12, Number13, Number14, Number15, Number16, Number17, Number18, Number19, Number20) 
                                                    values(@DrawNo, @DrawDate, @Plus, @Number1, @Number2, @Number3, @Number4, @Number5, @Number6, @Number7, @Number8, @Number9, @Number10, @Number11, @Number12, @Number13, @Number14, @Number15, @Number16, @Number17, @Number18, @Number19, @Number20)", this.connectionString.tableName);
 
-                DataSet dataSetLosowania = new DataSet();
-                SqlDataAdapter dataAdapterLosowanie = new SqlDataAdapter(qry, conn);
+                DataSet dataSetDraws = new DataSet();
+                SqlDataAdapter dataAdapterDraw = new SqlDataAdapter(qry, conn);
                 ClearTable(conn); //Clear table to avoid duplicating data
-                dataAdapterLosowanie.Fill(dataSetLosowania, this.connectionString.tableName);
-                DataTable dt = dataSetLosowania.Tables[this.connectionString.tableName];
+                dataAdapterDraw.Fill(dataSetDraws, this.connectionString.tableName);
+                DataTable dt = dataSetDraws.Tables[this.connectionString.tableName];
 
                 int counter = 0; //Counter for displaying process of adding new rows to a database in a console windows
                 foreach (var los in drawsList) //Adding new rows to a dataset
@@ -88,8 +88,8 @@ namespace Lotto
                 }
 
                 // Insert values
-                dataAdapterLosowanie.InsertCommand = cmd;
-                dataAdapterLosowanie.Update(dataSetLosowania, this.connectionString.tableName);
+                dataAdapterDraw.InsertCommand = cmd;
+                dataAdapterDraw.Update(dataSetDraws, this.connectionString.tableName);
                 conn.Close();
             }
         }

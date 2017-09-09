@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lotto
 {
@@ -39,7 +34,7 @@ namespace Lotto
             }
         }
 
-        // Checks if connection with a database succeded
+        // Checks if connection with a database succeeded
         public static bool IsServerConnected(string connectionString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
