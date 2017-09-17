@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Linq;
 using System.Diagnostics;
+
 namespace Lotto
 {
     public static class LoadXML
@@ -24,7 +25,7 @@ namespace Lotto
         private static void SerializeToXMLAndSaveToFile(List<Draw> drawsList, string xmlPath = @"Losowania.xml")
         {
             XmlRootAttribute oRootAttr = new XmlRootAttribute();
-            oRootAttr.ElementName = "Losowania";
+            oRootAttr.ElementName = "Draws";
             oRootAttr.IsNullable = true;
             XmlSerializer oSerializer = new XmlSerializer(typeof(List<Draw>), oRootAttr);
             StreamWriter oStreamWriter = null;

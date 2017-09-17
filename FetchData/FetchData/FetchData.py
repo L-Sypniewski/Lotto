@@ -21,7 +21,7 @@ class DownloadData(object):
     DATE_OF_FIRST_DRAW = datetime.strptime('1996-03-18', '%Y-%m-%d')
     __XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
     __XSI = "{%s}" % __XSI_NAMESPACE
-    __NSMAP = {None : __XSI_NAMESPACE} # the default namespace (no prefix)
+    __NSMAP = {None : __XSI_NAMESPACE} # The default namespace (no prefix)
 
 
     def __SendHTTPRequest(date : str):
@@ -122,7 +122,7 @@ class DownloadData(object):
             root = xml.getroot()            
             formatted_date_time =  DownloadData.__ConvertFullDateTimeToISO(draw_data['DrawDate'] + ' ' + draw_data['DrawTime'])
             draw_elem = etree.SubElement(root, "Draw", ID=draw_data['DrawNo'])
-            if insert_as_first == True:   # to append data at the beginning (for updating purposes)
+            if insert_as_first == True:   # For appending data at the beginning (for updating purposes)
                 root.insert(0,draw_elem)           
             etree.SubElement(draw_elem, "Date").text = formatted_date_time
             if 'Plus' in draw_data:

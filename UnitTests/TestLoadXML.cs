@@ -12,6 +12,7 @@ namespace Lotto
         static List<Draw> list;
         static List<Draw> list_sorted;
         static SQLUtils.ConnectionString connectionString = new SQLUtils.ConnectionString(@"(localdb)\MSSQLLocalDB", "Lotto", true, "RawData");
+        const int LAST_DRAW_WITHOUT_SORTING = 2438; //2438 is the last draw without numbers sorted by draw order
 
         private void RunTest(List<Draw> dataList, int drawNumber, int[] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
         {
@@ -114,7 +115,7 @@ namespace Lotto
         #endregion
         public void TestDrawsUnsorted(int drawNumber, int[] date, byte? plus, int number1, int number2, int number3, int number4, int number5, int number6, int number7, int number8, int number9, int number10, int number11, int number12, int number13, int number14, int number15, int number16, int number17, int number18, int number19, int number20)
         {
-            if (drawNumber > 2438) //2438 is the last draw without numbers sorted by draw order
+            if (drawNumber > LAST_DRAW_WITHOUT_SORTING)
             RunTest(list, drawNumber, date, plus, number1, number2, number3, number4, number5, number6, number7, number8, number9, number10, number11, number12, number13, number14, number15, number16, number17, number18, number19, number20);
             else
                 RunTest(list, drawNumber, date, plus, number20, number19, number18, number17, number16, number15, number14, number13, number12, number11, number10, number9, number8, number7, number6, number5, number4, number3, number2, number1);
@@ -141,7 +142,7 @@ namespace Lotto
                 Assert.AreEqual("********************************************************************************\r", (expected[4]));
                 Assert.IsTrue(expected[5].Contains("Processed") & expected[5].Contains("days"));
                 Assert.AreEqual("Function UPDATE_XML has finished", expected[expected.Count - 10]);
-                Assert.AreEqual( "MAKE_PRETTY_XML\r", expected[expected.Count - 8]);
+                Assert.AreEqual("MAKE_PRETTY_XML\r", expected[expected.Count - 8]);
                 Assert.AreEqual("File has been formated.\r", expected[expected.Count - 5]);
                 Assert.AreEqual("Function MAKE_PRETTY_XML has finished", expected[expected.Count - 3]);
                 #endregion

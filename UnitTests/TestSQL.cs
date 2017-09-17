@@ -14,7 +14,7 @@ namespace Lotto
         public void setUp()
         {
             list = LoadXML.DeserializeXML();
-            list_sorted = LoadXML.DeserializeXML();
+            list_sorted = LoadXML.DeserializeXML(); // Easier apporach than creating deep copy
             foreach (var draw in list_sorted)
             {
                 draw.Numbers.Sort();

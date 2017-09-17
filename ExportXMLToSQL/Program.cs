@@ -16,7 +16,6 @@ namespace Lotto
             //bool c = SQLQueries.procedure_ValidateDatabaseRowNumbers(new SQLUtils.ConnectionString(@"(localdb)\MSSQLLocalDB", "Lotto", true, "RawData").ToString());
 
             LoadXML.RunDownloadScript();
-
             Console.WriteLine("Done");
             Console.ReadKey();
         }

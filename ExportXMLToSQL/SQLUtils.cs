@@ -5,7 +5,7 @@ namespace Lotto
 {
     public static class SQLUtils
     {
-        //Creates new database. Returns 0 if succeded, throws an exception if failed
+        // Creates new database. Returns 0 if succeeded, throws an exception if failed
         public static int CreateNewDatabase(ConnectionString connectionString)
         {
             string newDatabaseName = connectionString.databaseName;
@@ -25,7 +25,7 @@ namespace Lotto
                 catch (System.Data.SqlClient.SqlException ex)
                 {
                     Console.WriteLine(ex.ToString());
-                    throw new Exception(ex.Message); //   ErrorCode	-2146232060	if database with a given name already exists
+                    throw new Exception(ex.Message); // ErrorCode -2146232060 if database with a given name already exists
                 }
                 finally
                 {
