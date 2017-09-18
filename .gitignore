@@ -240,3 +240,10 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+$ cat .gitattributes
+FetchData/venv_Lotto/* linguist-vendored
+$ cat .gitattributes
+ExportXMLToSQL/XML/* linguist-vendored
+$ cat .gitattributes
+UnitTests/Reference data/* linguist-vendored
